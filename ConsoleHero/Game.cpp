@@ -1,92 +1,6 @@
 ﻿#include "Game.h"
 #include "Track.h"
 
-//class Game {
-//	char board[55][52], buffer[55][52];
-//	char Player;
-//	int plX, plY;
-//public:
-//	Game()
-//	{
-//	}
-//	void Init() {
-//		Player = 'A';
-//		plX = 5; plY = 0;
-//		for (int i = 0; i < 55; i++) {
-//			for (int j = 0; j < 52; j++) {
-//				if (j % 10 == 0)
-//				{
-//					board[i][j] = buffer[i][j] = '|';
-//				}
-//				else
-//					board[i][j] = buffer[i][j] = ' ';
-//
-//			}
-//		}
-//		board[plX][plY] = Player;
-//	}
-//	void MainL() {
-//		bool loop = true;
-//		DrawAll();
-//		while (loop == true) {
-//			UpdateBuffer();
-//			Move();
-//			Sleep(30);
-//			SelDraw();
-//		}
-//	}
-//private:
-//	void Move() {
-//		char keyPressed = ' ';
-//		if (_kbhit()) {
-//			keyPressed = _getch();
-//		}
-//		else {
-//			keyPressed = ' ';
-//		}
-//
-//	}
-//	void DrawAll() 
-//	{
-//		for (int i = 0; i < 55; i++) 
-//		{
-//			for (int j = 0; j < 52; j++) 
-//			{
-//				printf("%c", board[i][j]);
-//			}
-//			printf("\n");
-//		}
-//	}
-//	void SelDraw() {
-//		for (int i = 0; i < 55; i++) 
-//		{
-//			for (int j = 0; j < 52; j++) 
-//			{
-//				if (board[i][j] != buffer[i][j]) 
-//				{
-//					HANDLE hOut;
-//					COORD Position;
-//					hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-//
-//					Position.X = i;
-//					Position.Y = j;
-//
-//					SetConsoleCursorPosition(hOut, Position);
-//					printf("%c", board[i][j]);
-//				}
-//			}
-//		}
-//	}
-//	void UpdateBuffer() {
-//		for (int i = 0; i < 55; i++) 
-//		{
-//			for (int j = 0; j < 52; j++) 
-//			{
-//				buffer[i][j] = board[i][j];
-//			}
-//		}
-//	}
-//};
 
 int selection = 1;
 bool menuRunning = true;
@@ -162,10 +76,21 @@ int main()
 	//	}
 	//}
 
-	Game g;
+	//Game g;
 
-	g.init();
-	g.mainL();
+	//g.init();
+	//g.mainL();
+
+	Track t;
+	t.readTrack();
+
+	for (int i = 0; i < t.getTrackLength(); i++)
+	{
+		cout << i << endl;
+	}
+
+
+
 
 
 
@@ -225,62 +150,62 @@ int main()
 	//	cout << endl;
 	//}
 
-	//for (int i = 0; i < t.track.size(); i++)
-	//{
-	//	for (int j = 0; j < t.track[i].size(); j++)
-	//	{
-	//		if (t.track[i][j] == 0)
-	//			continue;
-	//		else
-	//		{
-	//			if (j == 0)
-	//			{
-	//				gotoxy(i * 3 + 4, j * 10 + 8);
-	//				printf("%s", beatNote1.c_str());
-	//				gotoxy(i * 3 + 5,j * 10 + 8);
-	//				printf("%s", beatNote2.c_str());
-	//				gotoxy(i * 3 + 6,j * 10 + 8);
-	//				printf("%s", beatNote3.c_str());
-	//			}
-	//			if (j == 1)
-	//			{
-	//				gotoxy(i * 3 + 4, j * 10 + 8);
-	//				printf("%s", beatNote1.c_str());
-	//				gotoxy(i * 3 + 5, j * 10 + 8);
-	//				printf("%s", beatNote2.c_str());
-	//				gotoxy(i * 3 + 6, j * 10 + 8);
-	//				printf("%s", beatNote3.c_str());
-	//			}
-	//			if (j == 2)
-	//			{
-	//				gotoxy(i * 3 + 4, j * 10 + 8);
-	//				printf("%s", beatNote1.c_str());
-	//				gotoxy(i * 3 + 5, j * 10 + 8);
-	//				printf("%s", beatNote2.c_str());
-	//				gotoxy(i * 3 + 6, j * 10 + 8);
-	//				printf("%s", beatNote3.c_str());
-	//			}
-	//			if (j == 3)
-	//			{
-	//				gotoxy(i * 3 + 4, j * 10 + 8);
-	//				printf("%s", beatNote1.c_str());
-	//				gotoxy(i * 3 + 5, j * 10 + 8);
-	//				printf("%s", beatNote2.c_str());
-	//				gotoxy(i * 3 + 6, j * 10 + 8);
-	//				printf("%s", beatNote3.c_str());
-	//			}
-	//			if (j == 4)
-	//			{
-	//				gotoxy(i * 3 + 4, j * 10 + 8);
-	//				printf("%s", beatNote1.c_str());
-	//				gotoxy(i * 3 + 5, j * 10 + 8);
-	//				printf("%s", beatNote2.c_str());
-	//				gotoxy(i * 3 + 6, j * 10 + 8);
-	//				printf("%s", beatNote3.c_str());
-	//			}
-	//		}
-	//	}
-	//}
+	for (int i = 0; i < t.track.size(); i++)
+	{
+		for (int j = 0; j < t.track[i].size(); j++)
+		{
+			if (t.track[i][j] == 0)
+				continue;
+			else
+			{
+				if (j == 0)
+				{
+					gotoxy(i * 3 + 4, j * 10 + 8);
+					printf("%s", beatNote1.c_str());
+					gotoxy(i * 3 + 5,j * 10 + 8);
+					printf("%s", beatNote2.c_str());
+					gotoxy(i * 3 + 6,j * 10 + 8);
+					printf("%s", beatNote3.c_str());
+				}
+				if (j == 1)
+				{
+					gotoxy(i * 3 + 4, j * 10 + 8);
+					printf("%s", beatNote1.c_str());
+					gotoxy(i * 3 + 5, j * 10 + 8);
+					printf("%s", beatNote2.c_str());
+					gotoxy(i * 3 + 6, j * 10 + 8);
+					printf("%s", beatNote3.c_str());
+				}
+				if (j == 2)
+				{
+					gotoxy(i * 3 + 4, j * 10 + 8);
+					printf("%s", beatNote1.c_str());
+					gotoxy(i * 3 + 5, j * 10 + 8);
+					printf("%s", beatNote2.c_str());
+					gotoxy(i * 3 + 6, j * 10 + 8);
+					printf("%s", beatNote3.c_str());
+				}
+				if (j == 3)
+				{
+					gotoxy(i * 3 + 4, j * 10 + 8);
+					printf("%s", beatNote1.c_str());
+					gotoxy(i * 3 + 5, j * 10 + 8);
+					printf("%s", beatNote2.c_str());
+					gotoxy(i * 3 + 6, j * 10 + 8);
+					printf("%s", beatNote3.c_str());
+				}
+				if (j == 4)
+				{
+					gotoxy(i * 3 + 4, j * 10 + 8);
+					printf("%s", beatNote1.c_str());
+					gotoxy(i * 3 + 5, j * 10 + 8);
+					printf("%s", beatNote2.c_str());
+					gotoxy(i * 3 + 6, j * 10 + 8);
+					printf("%s", beatNote3.c_str());
+				}
+			}
+		}
+	}
 
 
 	//					HANDLE hOut;
@@ -359,6 +284,55 @@ int main()
 	//		}
 
 	//	}
+	//}
+
+	//std::vector< std::vector<int> >::const_iterator row;
+	//std::vector<int>::const_iterator col;
+	//int it = 0;
+
+	//int length = 0;
+
+	//vector<vector<int>> test(10, vector<int>(10));
+	//vector<vector<int>> track;
+	//for (int i = 0; i < test.size(); i++)
+	//{
+	//	for (int j = 0; j < test[i].size(); j++)
+	//	{
+	//		if (i % 3 == 0)
+	//		{
+	//			test[i][j] = 12;
+	//		}
+	//		else
+	//			test[i][j] = i;
+	//		cout << test[i][j];
+	//	}
+	//	if (i % 3 == 0 && i != 0)
+	//	{
+	//		length++;
+	//	}
+	//	cout << endl;
+	//}
+
+	//cout << length << endl << endl;
+
+	//for (int k = 0; k < 2; k++)
+	//{
+	//	for (int i = k * 3 + 1; i % 3 != 0 || i == 0; i++)
+	//	{
+	//		vector<int>::const_iterator first = test[i].begin();
+	//		vector<int>::const_iterator last = test[i].end();
+	//		vector<int> tmp(first, last);
+	//		track.push_back(tmp);
+	//	}
+	//	for (int i = k * 2; i < track.size(); i++)
+	//	{
+	//		for (int j = 0; j < track[i].size(); j++)
+	//		{
+	//			cout << track[i][j];
+	//		}
+	//		cout << endl;
+	//	}
+	//	cout << endl;
 	//}
 	
 	system("pause");

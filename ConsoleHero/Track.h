@@ -16,7 +16,11 @@ public:
 	Track();
 	~Track();
 	void readTrack();
+	void loadNextSection();
+	int getTrackLength();
+	
 	vector<vector<int>> track;
+	vector<vector<int>> board, buffer, nextBoard;
 private:
 	int trackLength;
 	
