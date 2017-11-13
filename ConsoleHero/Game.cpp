@@ -21,6 +21,7 @@ void menu()
 	else
 	{
 		printf("Guitar Hero\n");
+
 	}
 
 	if (selection == 2)
