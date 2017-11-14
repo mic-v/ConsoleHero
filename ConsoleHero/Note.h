@@ -16,4 +16,6 @@ public:
 	int getY();
 private:
 	int coords[2];
+	int type;
+	bool loadTime;
 };

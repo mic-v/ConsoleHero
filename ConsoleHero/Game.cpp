@@ -82,13 +82,13 @@ int main()
 	//g.init();
 	//g.mainL();
 
-	Track t;
-	t.readTrack();
+	////Track t;
+	////t.readTrack();
 
-	for (int i = 0; i < t.getTrackLength(); i++)
-	{
-		cout << i << endl;
-	}
+	//for (int i = 0; i < t.getTrackLength(); i++)
+	//{
+	//	cout << i << endl;
+	//}
 
 
 
@@ -116,40 +116,40 @@ int main()
 	//	Sleep(20);
 	//}
 
-	//Track t;
-	//t.readTrack();
-	//vector<vector<char>> test;
+	Track t;
+	t.readTrack();
+	vector<vector<char>> test;
 
-	//string line;
-	//ifstream myfile("Game.txt");
-	//if (myfile.is_open())
-	//{
-	//	for (int i = 0; getline(myfile, line); i++)
-	//	{
-	//		//cout << line << endl;
-	//		vector<char> test2(line.size());
-	//		test.push_back(test2);
-	//		for (int j = 0; j < line.size(); j++)
-	//		{
-	//			if (line[j] == '~')
-	//				test[i][j] = ' ';
-	//			else
-	//				test[i][j] = line[j];
-	//		}
-	//	}
-	//}
+	string line;
+	ifstream myfile("Game.txt");
+	if (myfile.is_open())
+	{
+		for (int i = 0; getline(myfile, line); i++)
+		{
+			//cout << line << endl;
+			vector<char> test2(line.size());
+			test.push_back(test2);
+			for (int j = 0; j < line.size(); j++)
+			{
+				if (line[j] == '~')
+					test[i][j] = ' ';
+				else
+					test[i][j] = line[j];
+			}
+		}
+	}
 
 	//myfile.close();
 
 
-	//for (int i = 0; i < test.size(); i++)
-	//{
-	//	for (int j = 0; j < test[i].size(); j++)
-	//	{
-	//		cout << test[i][j];
-	//	}
-	//	cout << endl;
-	//}
+	for (int i = 0; i < test.size(); i++)
+	{
+		for (int j = 0; j < test[i].size(); j++)
+		{
+			cout << test[i][j];
+		}
+		cout << endl;
+	}
 
 	for (int i = 0; i < t.track.size(); i++)
 	{
@@ -161,47 +161,47 @@ int main()
 			{
 				if (j == 0)
 				{
-					gotoxy(i * 3 + 4, j * 10 + 8);
+					gotoxy(56 - (i * 3) - 1, j * 10 + 8);
 					printf("%s", beatNote1.c_str());
-					gotoxy(i * 3 + 5,j * 10 + 8);
+					gotoxy((56) - (i * 3) - 2,j * 10 + 8);
 					printf("%s", beatNote2.c_str());
-					gotoxy(i * 3 + 6,j * 10 + 8);
+					gotoxy((56) - (i * 3) - 3,j * 10 + 8);
 					printf("%s", beatNote3.c_str());
 				}
 				if (j == 1)
 				{
-					gotoxy(i * 3 + 4, j * 10 + 8);
+					gotoxy(55 - (i * 3) - 1, j * 10 + 8);
 					printf("%s", beatNote1.c_str());
-					gotoxy(i * 3 + 5, j * 10 + 8);
+					gotoxy((55) - (i * 3) - 2, j * 10 + 8);
 					printf("%s", beatNote2.c_str());
-					gotoxy(i * 3 + 6, j * 10 + 8);
+					gotoxy((55) - (i * 3) - 3, j * 10 + 8);
 					printf("%s", beatNote3.c_str());
 				}
 				if (j == 2)
 				{
-					gotoxy(i * 3 + 4, j * 10 + 8);
+					gotoxy(55 - (i * 3) - 1, j * 10 + 8);
 					printf("%s", beatNote1.c_str());
-					gotoxy(i * 3 + 5, j * 10 + 8);
+					gotoxy((55) - (i * 3) - 2, j * 10 + 8);
 					printf("%s", beatNote2.c_str());
-					gotoxy(i * 3 + 6, j * 10 + 8);
+					gotoxy((55) - (i * 3) - 3, j * 10 + 8);
 					printf("%s", beatNote3.c_str());
 				}
 				if (j == 3)
 				{
-					gotoxy(i * 3 + 4, j * 10 + 8);
+					gotoxy(55 - (i * 3) - 1, j * 10 + 8);
 					printf("%s", beatNote1.c_str());
-					gotoxy(i * 3 + 5, j * 10 + 8);
+					gotoxy((55) - (i * 3) - 2, j * 10 + 8);
 					printf("%s", beatNote2.c_str());
-					gotoxy(i * 3 + 6, j * 10 + 8);
+					gotoxy((55) - (i * 3) - 3, j * 10 + 8);
 					printf("%s", beatNote3.c_str());
 				}
 				if (j == 4)
 				{
-					gotoxy(i * 3 + 4, j * 10 + 8);
+					gotoxy(55 - (i * 3) - 1, j * 10 + 8);
 					printf("%s", beatNote1.c_str());
-					gotoxy(i * 3 + 5, j * 10 + 8);
+					gotoxy((55) - (i * 3) - 2, j * 10 + 8);
 					printf("%s", beatNote2.c_str());
-					gotoxy(i * 3 + 6, j * 10 + 8);
+					gotoxy((55) - (i * 3) - 3, j * 10 + 8);
 					printf("%s", beatNote3.c_str());
 				}
 			}
@@ -350,18 +350,8 @@ Game::~Game()
 void Game::init()
 {
 	string line;
-	//for (int i = 0; i < 55; i++) 
-	//{
-	//	for (int j = 0; j < 52; j++) 
-	//	{
-	//		if (j % 10 == 0)
-	//		{
-	//			board[i][j] = buffer[i][j] = '|';
-	//		}
-	//		else
-	//			board[i][j] = buffer[i][j] = ' ';
-	//	}
-	//}
+	
+
 	Player = 'A';
 	plX = 4; plY = 169;
 	ifstream myfile("Game.txt");
@@ -369,7 +359,6 @@ void Game::init()
 	{
 		for (int i = 0; getline(myfile, line); i++)
 		{
-			//cout << line << endl;
 			vector<char> column(line.size());
 			boar.push_back(column);
 			for (int j = 0; j < line.size(); j++)
@@ -383,7 +372,6 @@ void Game::init()
 	}
 	buffe = boar;
 	t.readTrack();
-	//boar[plX][plY] = Player;
 }
 
 void Game::mainL()
@@ -469,12 +457,7 @@ void Game::move()
 			}
 		}
 	}
-	//if (keyPressed != ' ')
-	//{
-	//	boar[plX][plY+1] = Player;
-	//	boar[plX][plY] = ' ';
-	//	plY++;
-	//}
+
 }
 
 void Game::drawAll()

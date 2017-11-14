@@ -3,6 +3,7 @@
 Track::Track()
 {
 	trackLength = 0;
+	songStart = 0;
 }
 
 Track::~Track()

@@ -23,5 +23,5 @@ public:
 	vector<vector<int>> board, buffer, nextBoard;
 private:
 	int trackLength;
-	
+	int songStart;
 };
