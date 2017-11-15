@@ -21,7 +21,7 @@ void menu()
 	else
 	{
 		printf("Guitar Hero\n");
-
+		
 	}
 
 	if (selection == 2)
@@ -118,95 +118,102 @@ int main()
 
 	Track t;
 	t.readTrack();
-	vector<vector<char>> test;
-
-	string line;
-	ifstream myfile("Game.txt");
-	if (myfile.is_open())
-	{
-		for (int i = 0; getline(myfile, line); i++)
-		{
-			//cout << line << endl;
-			vector<char> test2(line.size());
-			test.push_back(test2);
-			for (int j = 0; j < line.size(); j++)
-			{
-				if (line[j] == '~')
-					test[i][j] = ' ';
-				else
-					test[i][j] = line[j];
-			}
-		}
-	}
-
-	//myfile.close();
-
-
-	for (int i = 0; i < test.size(); i++)
-	{
-		for (int j = 0; j < test[i].size(); j++)
-		{
-			cout << test[i][j];
-		}
-		cout << endl;
-	}
-
+	//vector<vector<char>> test;
 	for (int i = 0; i < t.track.size(); i++)
 	{
 		for (int j = 0; j < t.track[i].size(); j++)
 		{
-			if (t.track[i][j] == 0)
-				continue;
-			else
-			{
-				if (j == 0)
-				{
-					gotoxy(56 - (i * 3) - 1, j * 10 + 8);
-					printf("%s", beatNote1.c_str());
-					gotoxy((56) - (i * 3) - 2,j * 10 + 8);
-					printf("%s", beatNote2.c_str());
-					gotoxy((56) - (i * 3) - 3,j * 10 + 8);
-					printf("%s", beatNote3.c_str());
-				}
-				if (j == 1)
-				{
-					gotoxy(55 - (i * 3) - 1, j * 10 + 8);
-					printf("%s", beatNote1.c_str());
-					gotoxy((55) - (i * 3) - 2, j * 10 + 8);
-					printf("%s", beatNote2.c_str());
-					gotoxy((55) - (i * 3) - 3, j * 10 + 8);
-					printf("%s", beatNote3.c_str());
-				}
-				if (j == 2)
-				{
-					gotoxy(55 - (i * 3) - 1, j * 10 + 8);
-					printf("%s", beatNote1.c_str());
-					gotoxy((55) - (i * 3) - 2, j * 10 + 8);
-					printf("%s", beatNote2.c_str());
-					gotoxy((55) - (i * 3) - 3, j * 10 + 8);
-					printf("%s", beatNote3.c_str());
-				}
-				if (j == 3)
-				{
-					gotoxy(55 - (i * 3) - 1, j * 10 + 8);
-					printf("%s", beatNote1.c_str());
-					gotoxy((55) - (i * 3) - 2, j * 10 + 8);
-					printf("%s", beatNote2.c_str());
-					gotoxy((55) - (i * 3) - 3, j * 10 + 8);
-					printf("%s", beatNote3.c_str());
-				}
-				if (j == 4)
-				{
-					gotoxy(55 - (i * 3) - 1, j * 10 + 8);
-					printf("%s", beatNote1.c_str());
-					gotoxy((55) - (i * 3) - 2, j * 10 + 8);
-					printf("%s", beatNote2.c_str());
-					gotoxy((55) - (i * 3) - 3, j * 10 + 8);
-					printf("%s", beatNote3.c_str());
-				}
-			}
+			cout << t.track[i][j];
 		}
+		cout << endl;
 	}
+
+	//string line;
+	//ifstream myfile("Game.txt");
+	//if (myfile.is_open())
+	//{
+	//	for (int i = 0; getline(myfile, line); i++)
+	//	{
+	//		//cout << line << endl;
+	//		vector<char> test2(line.size());
+	//		test.push_back(test2);
+	//		for (int j = 0; j < line.size(); j++)
+	//		{
+	//			if (line[j] == '~')
+	//				test[i][j] = ' ';
+	//			else
+	//				test[i][j] = line[j];
+	//		}
+	//	}
+	//}
+	//myfile.close();
+
+
+	//for (int i = 0; i < t.track.size(); i++)
+	//{
+	//	for (int j = 0; j < t.track[i].size(); j++)
+	//	{
+	//		cout << t.track[i][j];
+	//	}
+	//	cout << endl;
+	//}
+
+	//for (int i = 0; i < t.track.size(); i++)
+	//{
+	//	for (int j = 0; j < t.track[i].size(); j++)
+	//	{
+	//		if (t.track[i][j] == 0)
+	//			continue;
+	//		else
+	//		{
+	//			if (j == 0)
+	//			{
+	//				gotoxy((i * 3) + 4, j * 10 + 8);
+	//				printf("%s", beatNote1.c_str());
+	//				gotoxy((i * 3) + 5, j * 10 + 8);
+	//				printf("%s", beatNote2.c_str());
+	//				gotoxy((i * 3) + 6, j * 10 + 8);
+	//				printf("%s", beatNote3.c_str());
+	//			}
+	//			if (j == 1)
+	//			{
+	//				gotoxy((i * 3) + 4, j * 10 + 8);
+	//				printf("%s", beatNote1.c_str());
+	//				gotoxy((i * 3) + 5, j * 10 + 8);
+	//				printf("%s", beatNote2.c_str());
+	//				gotoxy((i * 3) + 6, j * 10 + 8);
+	//				printf("%s", beatNote3.c_str());
+	//			}
+	//			if (j == 2)
+	//			{
+	//				gotoxy((i * 3) + 4, j * 10 + 8);
+	//				printf("%s", beatNote1.c_str());
+	//				gotoxy((i * 3) + 5, j * 10 + 8);
+	//				printf("%s", beatNote2.c_str());
+	//				gotoxy((i * 3) + 6, j * 10 + 8);
+	//				printf("%s", beatNote3.c_str());
+	//			}
+	//			if (j == 3)
+	//			{
+	//				gotoxy((i * 3) + 4, j * 10 + 8);
+	//				printf("%s", beatNote1.c_str());
+	//				gotoxy((i * 3) + 5, j * 10 + 8);
+	//				printf("%s", beatNote2.c_str());
+	//				gotoxy((i * 3) + 6, j * 10 + 8);
+	//				printf("%s", beatNote3.c_str());
+	//			}
+	//			if (j == 4)
+	//			{
+	//				gotoxy((i * 3) + 4, j * 10 + 8);
+	//				printf("%s", beatNote1.c_str());
+	//				gotoxy((i * 3) + 5, j * 10 + 8);
+	//				printf("%s", beatNote2.c_str());
+	//				gotoxy((i * 3) + 6, j * 10 + 8);
+	//				printf("%s", beatNote3.c_str());
+	//			}
+	//		}
+	//	}
+	//}
 
 
 	//					HANDLE hOut;
@@ -398,65 +405,21 @@ void Game::move()
 		keyPressed = ' ';
 	}
 
-	if (keyPressed != ' ')
-	{
-		for (int i = 0; i < t.track.size(); i++)
-		{
-			for (int j = 0; j < t.track[i].size(); j++)
-			{
-				if (t.track[i][j] == 0)
-					continue;
-				else
-				{
-					if (j == 0)
-					{
-						gotoxy(i * 3 + 5, j * 10 + 8);
-						printf("%s", beatNote1.c_str());
-						gotoxy(i * 3 + 6, j * 10 + 8);
-						printf("%s", beatNote2.c_str());
-						gotoxy(i * 3 + 7, j * 10 + 8);
-						printf("%s", beatNote3.c_str());
-					}
-					if (j == 1)
-					{
-						gotoxy(i * 3 + 4, j * 10 + 8);
-						printf("%s", beatNote1.c_str());
-						gotoxy(i * 3 + 5, j * 10 + 8);
-						printf("%s", beatNote2.c_str());
-						gotoxy(i * 3 + 6, j * 10 + 8);
-						printf("%s", beatNote3.c_str());
-					}
-					if (j == 2)
-					{
-						gotoxy(i * 3 + 4, j * 10 + 8);
-						printf("%s", beatNote1.c_str());
-						gotoxy(i * 3 + 5, j * 10 + 8);
-						printf("%s", beatNote2.c_str());
-						gotoxy(i * 3 + 6, j * 10 + 8);
-						printf("%s", beatNote3.c_str());
-					}
-					if (j == 3)
-					{
-						gotoxy(i * 3 + 4, j * 10 + 8);
-						printf("%s", beatNote1.c_str());
-						gotoxy(i * 3 + 5, j * 10 + 8);
-						printf("%s", beatNote2.c_str());
-						gotoxy(i * 3 + 6, j * 10 + 8);
-						printf("%s", beatNote3.c_str());
-					}
-					if (j == 4)
-					{
-						gotoxy(i * 3 + 4, j * 10 + 8);
-						printf("%s", beatNote1.c_str());
-						gotoxy(i * 3 + 5, j * 10 + 8);
-						printf("%s", beatNote2.c_str());
-						gotoxy(i * 3 + 6, j * 10 + 8);
-						printf("%s", beatNote3.c_str());
-					}
-				}
-			}
-		}
-	}
+	//if (keyPressed != ' ')
+	//{
+	//	for (int i = 0; i < t.track.size(); i++)
+	//	{
+	//		for (int j = 0; j < t.track[i].size(); j++)
+	//		{
+	//			if (t.track[i][j] == 0)
+	//				continue;
+	//			else
+	//			{
+
+	//			}
+	//		}
+	//	}
+	//}
 
 }
 

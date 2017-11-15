@@ -11,18 +11,25 @@ Note::~Note()
 {
 }
 
-void Note::setNoteXY(int x, int y)
+void Note::setXY(int x, int y)
 {
-	coords[0] = x;
-	coords[1] = y;
+	nX = x;
+	nY = y;
+	for (int i = 0; i < 3; i++)
+	{
+		vector<int> tmp(2);
+		coords.push_back(tmp);
+		coords[i][0] = x + i;
+		coords[i][1] = y;
+	}
 }
 
 int Note::getX()
 {
-	return coords[0];
+	return nX;
 }
 
 int Note::getY()
 {
-	return coords[1];
+	return nY;
 }
