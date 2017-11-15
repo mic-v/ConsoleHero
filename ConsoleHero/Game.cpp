@@ -7,6 +7,8 @@ bool menuRunning = true;
 string beatNote1 = " +-----+ ";
 string beatNote2 = " |     | ";
 string beatNote3 = " +-----+ ";
+char topBottom[] = {' ', '+', '-','-', '-', '-', '-', '+', '-', };
+char middle[] = { ' ', '|', ' ',' ', ' ', ' ', ' ', '|', '-', };
 
 void menu()
 {
@@ -90,43 +92,17 @@ int main()
 	//	cout << i << endl;
 	//}
 
-
-
-
-
-
-	//while (true)
-	//{
-	//	if (_kbhit())
-	//	{
-	//		if (GetAsyncKeyState(0x41))
-	//		{
-	//			cout << "A" << endl;
-	//		}
-	//		if (GetAsyncKeyState(0x53))
-	//		{
-	//			cout << "S" << endl;
-	//		}
-	//		if (GetAsyncKeyState(VK_RETURN))
-	//		{
-	//			cout << "strum" << endl;
-	//		}
-
-	//	}
-	//	Sleep(20);
-	//}
-
-	Track t;
-	t.readTrack();
+	//Track t;
+	//t.readTrack();
 	//vector<vector<char>> test;
-	for (int i = 0; i < t.track.size(); i++)
-	{
-		for (int j = 0; j < t.track[i].size(); j++)
-		{
-			cout << t.track[i][j];
-		}
-		cout << endl;
-	}
+	//for (int i = 0; i < t.track.size(); i++)
+	//{
+	//	for (int j = 0; j < t.track[i].size(); j++)
+	//	{
+	//		cout << t.track[i][j];
+	//	}
+	//	cout << endl;
+	//}
 
 	//string line;
 	//ifstream myfile("Game.txt");
@@ -214,17 +190,6 @@ int main()
 	//		}
 	//	}
 	//}
-
-
-	//					HANDLE hOut;
-	//					COORD Position;
-	//					hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	//
-	//					Position.X = i;
-	//					Position.Y = j;
-	//
-	//					SetConsoleCursorPosition(hOut, Position);
-	//					printf("%c", board[i][j]);
 
 	//while (true)
 	//{
@@ -358,9 +323,6 @@ void Game::init()
 {
 	string line;
 	
-
-	Player = 'A';
-	plX = 4; plY = 169;
 	ifstream myfile("Game.txt");
 	if (myfile.is_open())
 	{
@@ -396,14 +358,73 @@ void Game::mainL()
 
 void Game::move()
 {
-	char keyPressed = ' ';
-	if (_kbhit()) 
+	if (noteTimer == 0.0f)
 	{
-		keyPressed = _getch();
+		noteTimer += t.trackRatio;
+		for (int i = 0; i < 5; i++)
+		{
+			if (i == 0)
+			{
+				Note * a;
+				a->setXY(1, 2);
+				t.A.push_back(a);
+			}
+			if (i == 1)
+			{
+				Note * s;
+				s->setXY(1, 12);
+				t.A.push_back(s);
+			}
+			if (i == 2)
+			{
+				Note * d;
+				d->setXY(1, 22);
+				t.A.push_back(d);
+			}
+			if (i == 3)
+			{
+				Note * f;
+				f->setXY(1, 32);
+				t.A.push_back(f);
+			}
+			if (i == 4)
+			{
+				Note * g;
+				g->setXY(1, 42);
+				t.A.push_back(g);
+			}
+		}
 	}
-	else {
-		keyPressed = ' ';
+	noteTimer += t.trackRatio;
+
+	for (int i = 0; i < t.notes.size(); i++)
+	{
+		for (int j = 0; j < t.notes[i].size(); j++)
+		{
+			if (t.notes[i][j]->getX == 1)
+			{
+				board[t.notes[i][j]->getX() + 2][t.notes[i][j]->getY()] = topBottom;
+			}
+			else if (t.notes[i][j]->getX = 2)
+			{
+
+			}
+			else
+			{
+
+			}
+			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+		}
 	}
+
+	//char keyPressed = ' ';
+	//if (_kbhit()) 
+	//{
+	//	keyPressed = _getch();
+	//}
+	//else {
+	//	keyPressed = ' ';
+	//}
 
 	//if (keyPressed != ' ')
 	//{
@@ -420,6 +441,11 @@ void Game::move()
 	//		}
 	//	}
 	//}
+	if (noteTimer >= 1.0f)
+	{
+		noteTimer = 0.0f;
+		timer++;
+	}
 
 }
 
@@ -434,7 +460,7 @@ void Game::drawAll()
 		printf("\n");
 	}
 
-	for (int i = 0; i < t.track.size(); i++)
+	/*for (int i = 0; i < t.track.size(); i++)
 	{
 		for (int j = 0; j < t.track[i].size(); j++)
 		{
@@ -489,7 +515,7 @@ void Game::drawAll()
 				}
 			}
 		}
-	}
+	}*/
 }
 
 void Game::selDraw()

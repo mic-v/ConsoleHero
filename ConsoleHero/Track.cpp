@@ -3,7 +3,12 @@
 Track::Track()
 {
 	trackLength = 0;
-	songStart = 0;
+	trackRatio = 18.0f / 54.0f;
+	notes.push_back(A);
+	notes.push_back(S);
+	notes.push_back(D);
+	notes.push_back(F);
+	notes.push_back(G);
 }
 
 Track::~Track()
@@ -17,29 +22,7 @@ void Track::readTrack()
 
 	if (myfile.is_open())
 	{
-		//for (int i = 0; getline(myfile, line); i++)
-		//{
-		//	if (i != 0 && i % 18 == 0)
-		//	{
-		//		trackLength++;
-		//		continue;
-		//	}
-		//	vector<int> column(line.size());
-		//	if (i < 1)
-		//	{
-		//	}
-		//	else
-		//	{
-		//		vector<int> column(line.size());
-		//		track.push_back(column);
-		//		for (int j = 0; j < line.size(); j++)
-		//		{
-		//			int tmp = line[j] - '0';
-		//			track[i][j] = tmp;
-		//		}
-		//	}
 
-		//}
 		for (int i = 0; getline(myfile, line); i++)
 		{
 			vector<int> column(line.size());
@@ -50,15 +33,21 @@ void Track::readTrack()
 				track[i][j] = tmp;
 			}
 		}
-		track.erase(track.begin());
-		//for (int i = 0; i < track.size(); i++)
-		//{
-		//	if (i != 0 && i % 18 == 0)
-		//	{
-		//	
-		//	}
-		//}
+
+		int j = 0;
+		for (int i = 0; i < track.size(); i++)
+		{
+			if (i % 19 == 0)
+			{
+				track.erase(track.begin() + i - j);
+				j++;
+			}
+		}
+		trackLength = track.size();
 	}
+	myfile.close();
+	std::reverse(track.begin(), track.end());
+
 	//if (myfile.is_open())
 	//{
 	//	for (int i = 0; getline(myfile, line); i++)
@@ -107,7 +96,6 @@ void Track::readTrack()
 	//	}
 	//	cout << endl;
 	//}
-	myfile.close();
 
 	
 }

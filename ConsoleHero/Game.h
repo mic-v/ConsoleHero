@@ -31,4 +31,6 @@ private:
 	void drawAll();
 	void selDraw();
 	void updateBuffer();
+	float noteTimer;
+	int timer;
 };
