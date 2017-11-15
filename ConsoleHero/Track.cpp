@@ -46,7 +46,6 @@ void Track::readTrack()
 		trackLength = track.size();
 	}
 	myfile.close();
-	std::reverse(track.begin(), track.end());
 
 	//if (myfile.is_open())
 	//{

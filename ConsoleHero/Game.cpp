@@ -7,8 +7,8 @@ bool menuRunning = true;
 string beatNote1 = " +-----+ ";
 string beatNote2 = " |     | ";
 string beatNote3 = " +-----+ ";
-char topBottom[] = {' ', '+', '-','-', '-', '-', '-', '+', '-', };
-char middle[] = { ' ', '|', ' ',' ', ' ', ' ', ' ', '|', '-', };
+char topBottom[] = {' ', '+', '-','-', '-', '-', '-', '+', ' ' };
+char middle[] = { ' ', '|', ' ',' ', ' ', ' ', ' ', '|', ' ' };
 
 void menu()
 {
@@ -79,10 +79,10 @@ int main()
 	//	}
 	//}
 
-	//Game g;
+	Game g;
 
-	//g.init();
-	//g.mainL();
+	g.init();
+	g.mainL();
 
 	////Track t;
 	////t.readTrack();
@@ -351,96 +351,114 @@ void Game::mainL()
 	{
 		updateBuffer();
 		move();
-		Sleep(20);
+		Sleep(60);
 		selDraw();
 	}
 }
 
 void Game::move()
 {
+
 	if (noteTimer == 0.0f)
 	{
 		noteTimer += t.trackRatio;
 		for (int i = 0; i < 5; i++)
 		{
-			if (i == 0)
+			if (t.track[timer][i] == 1)
 			{
-				Note * a;
-				a->setXY(1, 2);
-				t.A.push_back(a);
-			}
-			if (i == 1)
-			{
-				Note * s;
-				s->setXY(1, 12);
-				t.A.push_back(s);
-			}
-			if (i == 2)
-			{
-				Note * d;
-				d->setXY(1, 22);
-				t.A.push_back(d);
-			}
-			if (i == 3)
-			{
-				Note * f;
-				f->setXY(1, 32);
-				t.A.push_back(f);
-			}
-			if (i == 4)
-			{
-				Note * g;
-				g->setXY(1, 42);
-				t.A.push_back(g);
+				if (i == 0)
+				{
+					Note * a = new Note();
+					a->setXY(1, 8);
+					t.A.push_back(a);
+					t.notes[3].push_back(a);
+				}
+				if (i == 1)
+				{
+					Note * s = new Note();
+					s->setXY(1, 18);
+					t.S.push_back(s);
+					t.notes[3].push_back(s);
+				}
+				if (i == 2)
+				{
+					Note * d = new Note();
+					d->setXY(1, 28);
+					t.D.push_back(d);
+					t.notes[3].push_back(d);
+				}
+				if (i == 3)
+				{
+					Note * f = new Note();
+					f->setXY(1, 38);
+					t.notes[3].push_back(f);
+				}
+				if (i == 4)
+				{
+					Note * g = new Note();
+					g->setXY(1, 48);
+					t.notes[4].push_back(g);
+				}
 			}
 		}
 	}
-	noteTimer += t.trackRatio;
+	else
+		noteTimer += t.trackRatio;
 
 	for (int i = 0; i < t.notes.size(); i++)
 	{
 		for (int j = 0; j < t.notes[i].size(); j++)
 		{
-			if (t.notes[i][j]->getX == 1)
+			if (t.notes[i][j]->getX() == 1)
 			{
-				board[t.notes[i][j]->getX() + 2][t.notes[i][j]->getY()] = topBottom;
+				int x = t.notes[i][j]->getX();
+				int y = t.notes[i][j]->getY();
+				for (int i = 0; i < 9; i++)
+				{
+					boar[x+3][y + i] = topBottom[i];
+				}
 			}
-			else if (t.notes[i][j]->getX = 2)
+			else if (t.notes[i][j]->getX() == 2)
 			{
-
+				int x = t.notes[i][j]->getX();
+				int y = t.notes[i][j]->getY();
+				for (int i = 0; i < 9; i++)
+				{
+					boar[x][y] = ' ';
+					boar[x + 2][y + i] = middle[i];
+					boar[x + 3][y + i] = topBottom[i];
+				}
+			}
+			else if (t.notes[i][j]->getX() == 3)
+			{
+				int x = t.notes[i][j]->getX();
+				int y = t.notes[i][j]->getY();
+				for (int i = 0; i < 9; i++)
+				{
+					boar[x + 1][y + i] = topBottom[i];
+					boar[x + 2][y + i] = middle[i];
+					boar[x + 3][y + i] = topBottom[i];
+					boar[x + 1][y] = ' ';
+					boar[x + 2][y] = ' ';
+				}
 			}
 			else
 			{
+				int x = t.notes[i][j]->getX();
+				int y = t.notes[i][j]->getY();
+				for (int i = 0; i < 9; i++)
+				{
+					boar[x + 1][y + i] = topBottom[i];
+					boar[x + 2][y + i] = middle[i];
+					boar[x + 3][y + i] = topBottom[i];
+					boar[x][y + i] = ' ';
 
+				}
 			}
 			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
 		}
 	}
 
-	//char keyPressed = ' ';
-	//if (_kbhit()) 
-	//{
-	//	keyPressed = _getch();
-	//}
-	//else {
-	//	keyPressed = ' ';
-	//}
-
-	//if (keyPressed != ' ')
-	//{
-	//	for (int i = 0; i < t.track.size(); i++)
-	//	{
-	//		for (int j = 0; j < t.track[i].size(); j++)
-	//		{
-	//			if (t.track[i][j] == 0)
-	//				continue;
-	//			else
-	//			{
-
-	//			}
-	//		}
-	//	}
-	//}
 	if (noteTimer >= 1.0f)
 	{
 		noteTimer = 0.0f;
