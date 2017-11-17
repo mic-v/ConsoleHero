@@ -84,7 +84,6 @@ int main()
 	//}
 
 	Game g;
-
 	g.init();
 	g.mainL();
 	
@@ -125,7 +124,7 @@ void Game::init()
 
 void Game::mainL()
 {
-	PlaySound(TEXT("Clannad_Ending.wav"), NULL, SND_ASYNC);
+	//PlaySound(TEXT("Clannad_Ending.wav"), NULL, SND_ASYNC);
 	bool loop = true;
 	drawAll();
 	while (loop == true)
@@ -133,8 +132,9 @@ void Game::mainL()
 		updateBuffer();
 		move();
 		input();
-		Sleep(100);
+		Sleep(10);
 		selDraw();
+
 	}
 }
 
@@ -149,6 +149,7 @@ void Game::input()
 			printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
 			//checkHit(t.notes[0]);
+			checkHit(t.notes[0]);
 		}
 		else
 		{
@@ -162,7 +163,7 @@ void Game::input()
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x99);
 			printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
-			//checkHit(t.notes[1]);
+			checkHit(t.notes[1]);
 		}
 		else
 		{
@@ -177,7 +178,7 @@ void Game::input()
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xAA);
 			printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
-			//checkHit(t.notes[2]);
+			checkHit(t.notes[2]);
 		}
 		else
 		{
@@ -191,7 +192,7 @@ void Game::input()
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xEE);
 			printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
-			//checkHit(t.notes[3]);
+			checkHit(t.notes[3]);
 		}
 		else
 		{
@@ -205,7 +206,7 @@ void Game::input()
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xDD);
 			printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
-			//checkHit(t.notes[4]);
+			checkHit(t.notes[4]);
 		}
 		else
 		{
@@ -232,21 +233,21 @@ void Game::move()
 						Note * a = new Note();
 						a->setXY(1, 8);
 						t.A.push_back(a);
-						t.notes[3].push_back(a);
+						t.notes[0].push_back(a);
 					}
 					if (i == 1)
 					{
 						Note * s = new Note();
 						s->setXY(1, 18);
 						t.S.push_back(s);
-						t.notes[3].push_back(s);
+						t.notes[1].push_back(s);
 					}
 					if (i == 2)
 					{
 						Note * d = new Note();
 						d->setXY(1, 28);
 						t.D.push_back(d);
-						t.notes[3].push_back(d);
+						t.notes[2].push_back(d);
 					}
 					if (i == 3)
 					{
@@ -269,34 +270,128 @@ void Game::move()
 
 	for (int i = 0; i < t.notes.size(); i++)
 	{
-		for (int j = 0; j < t.notes[i].size(); j++)
+		auto it = t.notes[i].begin();
+		//	for (int j = 0; j < t.notes[i].size(); j++)
+		//	{
+		//		if (t.notes[i][j]->getX() == 1)
+		//		{
+		//			int x = t.notes[i][j]->getX();
+		//			int y = t.notes[i][j]->getY();
+		//			for (int i = 0; i < 9; i++)
+		//			{
+		//				boar[x + 3][y + i] = topBottom[i];
+		//			}
+		//			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+		//		}
+		//		else if (t.notes[i][j]->getX() == 2)
+		//		{
+		//			int x = t.notes[i][j]->getX();
+		//			int y = t.notes[i][j]->getY();
+		//			for (int i = 0; i < 9; i++)
+		//			{
+		//				boar[x][y] = ' ';
+		//				boar[x + 2][y + i] = middle[i];
+		//				boar[x + 3][y + i] = topBottom[i];
+		//			}
+		//			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+		//		}
+		//		else if (t.notes[i][j]->getX() == 3)
+		//		{
+		//			int x = t.notes[i][j]->getX();
+		//			int y = t.notes[i][j]->getY();
+		//			for (int i = 0; i < 9; i++)
+		//			{
+		//				boar[x + 1][y + i] = topBottom[i];
+		//				boar[x + 2][y + i] = middle[i];
+		//				boar[x + 3][y + i] = topBottom[i];
+		//				boar[x + 1][y] = ' ';
+		//				boar[x + 2][y] = ' ';
+		//			}
+		//			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+		//		}
+		//		else if (t.notes[i][j]->getX() == 55)
+		//		{
+		//			int x = t.notes[i][j]->getX();
+		//			int y = t.notes[i][j]->getY();
+		//			for (int i = 0; i < 9; i++)
+		//			{
+		//				boar[x][y + i] = ' ';
+		//				boar[x + 1][y + i] = topBottom[i];
+		//				boar[x + 2][y + i] = middle[i];
+		//				//boar[x + 2][y + i] = middle[i];
+		//				//boar[x + 1][y] = ' ';
+		//			}
+		//			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+		//		}
+		//		else if (t.notes[i][j]->getX() == 56)
+		//		{
+		//			int x = t.notes[i][j]->getX();
+		//			int y = t.notes[i][j]->getY();
+		//			for (int i = 0; i < 9; i++)
+		//			{
+		//				boar[x][y + i] = ' ';
+		//				boar[x + 1][y + i] = topBottom[i];
+		//			}
+		//			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+		//		}
+		//		else if (t.notes[i][j]->getX() == 57)
+		//		{
+		//			int x = t.notes[i][j]->getX();
+		//			int y = t.notes[i][j]->getY();
+		//			for (int i = 0; i < 9; i++)
+		//			{
+		//				boar[x][y + i] = ' ';
+		//			}
+		//			//t.notes[i].erase(t.notes[i].begin() + j);
+		//			delete t.notes[i][j];
+		//			t.notes[i].erase(t.notes[i].begin() + j);
+		//		}
+		//		else
+		//		{
+		//			int x = t.notes[i][j]->getX();
+		//			int y = t.notes[i][j]->getY();
+		//			for (int i = 0; i < 9; i++)
+		//			{
+		//				boar[x + 1][y + i] = topBottom[i];
+		//				boar[x + 2][y + i] = middle[i];
+		//				boar[x + 3][y + i] = topBottom[i];
+		//				boar[x][y + i] = ' ';
+		//			}
+		//			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+		//		}
+		//	}
+		//}
+
+		while (it != t.notes[i].end())
 		{
-			if (t.notes[i][j]->getX() == 1)
+			if ((*it)->getX() == 1)
 			{
-				int x = t.notes[i][j]->getX();
-				int y = t.notes[i][j]->getY();
+				int x = (*it)->getX();
+				int y = (*it)->getY();
 				for (int i = 0; i < 9; i++)
 				{
-					boar[x+3][y + i] = topBottom[i];
+					boar[x + 3][y + i] = topBottom[i];
 				}
-				t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+				(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+				it++;
 			}
-			else if (t.notes[i][j]->getX() == 2)
+			else if ((*it)->getX() == 2)
 			{
-				int x = t.notes[i][j]->getX();
-				int y = t.notes[i][j]->getY();
+				int x = (*it)->getX();
+				int y = (*it)->getY();
 				for (int i = 0; i < 9; i++)
 				{
 					boar[x][y] = ' ';
 					boar[x + 2][y + i] = middle[i];
 					boar[x + 3][y + i] = topBottom[i];
 				}
-				t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+				(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+				it++;
 			}
-			else if (t.notes[i][j]->getX() == 3)
+			else if ((*it)->getX() == 3)
 			{
-				int x = t.notes[i][j]->getX();
-				int y = t.notes[i][j]->getY();
+				int x = (*it)->getX();
+				int y = (*it)->getY();
 				for (int i = 0; i < 9; i++)
 				{
 					boar[x + 1][y + i] = topBottom[i];
@@ -305,62 +400,64 @@ void Game::move()
 					boar[x + 1][y] = ' ';
 					boar[x + 2][y] = ' ';
 				}
-				t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+				(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+				it++;
 			}
-			else if (t.notes[i][j]->getX() == 55)
+			else if ((*it)->getX() == 55)
 			{
-				int x = t.notes[i][j]->getX();
-				int y = t.notes[i][j]->getY();
+				int x = (*it)->getX();
+				int y = (*it)->getY();
 				for (int i = 0; i < 9; i++)
 				{
 					boar[x][y + i] = ' ';
 					boar[x + 1][y + i] = topBottom[i];
 					boar[x + 2][y + i] = middle[i];
-					//boar[x + 2][y + i] = middle[i];
-					//boar[x + 1][y] = ' ';
+					boar[x + 2][y + i] = middle[i];
+					boar[x + 1][y] = ' ';
 				}
-				t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+				(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+				it++;
 			}
-			else if (t.notes[i][j]->getX() == 56)
+			else if ((*it)->getX() == 56)
 			{
-				int x = t.notes[i][j]->getX();
-				int y = t.notes[i][j]->getY();
+				int x = (*it)->getX();
+				int y = (*it)->getY();
 				for (int i = 0; i < 9; i++)
 				{
 					boar[x][y + i] = ' ';
 					boar[x + 1][y + i] = topBottom[i];
 				}
-				t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+				(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+				it++;
 			}
-			else if (t.notes[i][j]->getX() == 57)
+			else if ((*it)->getX() == 57)
 			{
-				int x = t.notes[i][j]->getX();
-				int y = t.notes[i][j]->getY();
+				int x = (*it)->getX();
+				int y = (*it)->getY();
 				for (int i = 0; i < 9; i++)
 				{
 					boar[x][y + i] = ' ';
 				}
-				//t.notes[i].erase(t.notes[i].begin() + j);
-				delete t.notes[i][j];
-				t.notes[i].erase(t.notes[i].begin() + j);
-				t.notes[i].resize(t.notes[i].size() - 1);
+				delete (*it);
+				it = t.notes[i].erase(it);
 			}
 			else
 			{
-				int x = t.notes[i][j]->getX();
-				int y = t.notes[i][j]->getY();
+				int x = (*it)->getX();
+				int y = (*it)->getY();
 				for (int i = 0; i < 9; i++)
 				{
 					boar[x + 1][y + i] = topBottom[i];
 					boar[x + 2][y + i] = middle[i];
 					boar[x + 3][y + i] = topBottom[i];
 					boar[x][y + i] = ' ';
-
 				}
-				t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+				(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+				it++;
 			}
 		}
 	}
+
 
 
 	if (timer != t.track.size())
@@ -371,7 +468,6 @@ void Game::move()
 			timer++;
 		}
 	}
-
 }
 
 void Game::drawAll()
@@ -478,23 +574,48 @@ void Game::updateBuffer()
 	}
 }
 
-void Game::checkHit(vector<Note*> notes)
+void Game::checkHit(vector<Note*> & notes)
 {
-	for (int i = 0; i < notes.size(); i++)
+	auto it = notes.begin();
+	//for (int i = 0; i < notes.size(); i++)
+	//{
+	//	if (notes[i]->getX() >= 49 && notes[i]->getX() <= 53)
+	//	{
+	//		int x = notes[i]->getX();
+	//		int y = notes[i]->getY();
+	//		for (int i = 0; i < 9; i++)
+	//		{
+	//			boar[x][y + i] = ' ';
+	//			boar[x + 1][y + i] = ' ';
+	//			boar[x + 2][y + i] = ' ';
+	//		}
+	//		//delete notes[i];
+	//		notes.erase(notes.begin() + i);
+	//		notes.resize(notes.size() - 1);
+	//		break;
+	//	}
+	//}
+	size_t vec_size = 0;
+	while (it != notes.end())
 	{
-		if (notes[i]->getX() >= 49 && notes[i]->getX() <= 53)
+		
+		if ((*it)->getX() >= 49 && (*it)->getX() <= 53)
 		{
-			int x = notes[i]->getX();
-			int y = notes[i]->getY();
+			int x = (*it)->getX();
+			int y = (*it)->getY();
 			for (int i = 0; i < 9; i++)
 			{
 				boar[x][y + i] = ' ';
 				boar[x + 1][y + i] = ' ';
 				boar[x + 2][y + i] = ' ';
 			}
-			//delete notes[i];
-			notes.erase(notes.begin() + i);
-			notes.resize(notes.size() - 1);
+			delete (*it);
+			it = notes.erase(it);
+		}
+		else
+		{
+			++it;
+			++vec_size;
 		}
 	}
 }

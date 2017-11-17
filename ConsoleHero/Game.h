@@ -31,7 +31,7 @@ private:
 	void drawAll();
 	void selDraw();
 	void updateBuffer();
-	void checkHit(vector<Note*> notes);
+	void checkHit(vector<Note*> & notes);
 	float noteTimer;
 	int timer;
 	bool keyDown[5];
