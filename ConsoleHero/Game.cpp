@@ -1,6 +1,6 @@
 ﻿#include "Game.h"
 #include "Track.h"
-
+#include <mmsystem.h>
 
 int selection = 1;
 bool menuRunning = true;
@@ -87,230 +87,6 @@ int main()
 
 	g.init();
 	g.mainL();
-
-	////Track t;
-	////t.readTrack();
-
-	//for (int i = 0; i < t.getTrackLength(); i++)
-	//{
-	//	cout << i << endl;
-	//}
-
-	//Track t;
-	//t.readTrack();
-	//vector<vector<char>> test;
-	//for (int i = 0; i < t.track.size(); i++)
-	//{
-	//	for (int j = 0; j < t.track[i].size(); j++)
-	//	{
-	//		cout << t.track[i][j];
-	//	}
-	//	cout << endl;
-	//}
-
-	//string line;
-	//ifstream myfile("Game.txt");
-	//if (myfile.is_open())
-	//{
-	//	for (int i = 0; getline(myfile, line); i++)
-	//	{
-	//		//cout << line << endl;
-	//		vector<char> test2(line.size());
-	//		test.push_back(test2);
-	//		for (int j = 0; j < line.size(); j++)
-	//		{
-	//			if (line[j] == '~')
-	//				test[i][j] = ' ';
-	//			else
-	//				test[i][j] = line[j];
-	//		}
-	//	}
-	//}
-	//myfile.close();
-
-
-	//for (int i = 0; i < t.track.size(); i++)
-	//{
-	//	for (int j = 0; j < t.track[i].size(); j++)
-	//	{
-	//		cout << t.track[i][j];
-	//	}
-	//	cout << endl;
-	//}
-
-	//for (int i = 0; i < t.track.size(); i++)
-	//{
-	//	for (int j = 0; j < t.track[i].size(); j++)
-	//	{
-	//		if (t.track[i][j] == 0)
-	//			continue;
-	//		else
-	//		{
-	//			if (j == 0)
-	//			{
-	//				gotoxy((i * 3) + 4, j * 10 + 8);
-	//				printf("%s", beatNote1.c_str());
-	//				gotoxy((i * 3) + 5, j * 10 + 8);
-	//				printf("%s", beatNote2.c_str());
-	//				gotoxy((i * 3) + 6, j * 10 + 8);
-	//				printf("%s", beatNote3.c_str());
-	//			}
-	//			if (j == 1)
-	//			{
-	//				gotoxy((i * 3) + 4, j * 10 + 8);
-	//				printf("%s", beatNote1.c_str());
-	//				gotoxy((i * 3) + 5, j * 10 + 8);
-	//				printf("%s", beatNote2.c_str());
-	//				gotoxy((i * 3) + 6, j * 10 + 8);
-	//				printf("%s", beatNote3.c_str());
-	//			}
-	//			if (j == 2)
-	//			{
-	//				gotoxy((i * 3) + 4, j * 10 + 8);
-	//				printf("%s", beatNote1.c_str());
-	//				gotoxy((i * 3) + 5, j * 10 + 8);
-	//				printf("%s", beatNote2.c_str());
-	//				gotoxy((i * 3) + 6, j * 10 + 8);
-	//				printf("%s", beatNote3.c_str());
-	//			}
-	//			if (j == 3)
-	//			{
-	//				gotoxy((i * 3) + 4, j * 10 + 8);
-	//				printf("%s", beatNote1.c_str());
-	//				gotoxy((i * 3) + 5, j * 10 + 8);
-	//				printf("%s", beatNote2.c_str());
-	//				gotoxy((i * 3) + 6, j * 10 + 8);
-	//				printf("%s", beatNote3.c_str());
-	//			}
-	//			if (j == 4)
-	//			{
-	//				gotoxy((i * 3) + 4, j * 10 + 8);
-	//				printf("%s", beatNote1.c_str());
-	//				gotoxy((i * 3) + 5, j * 10 + 8);
-	//				printf("%s", beatNote2.c_str());
-	//				gotoxy((i * 3) + 6, j * 10 + 8);
-	//				printf("%s", beatNote3.c_str());
-	//			}
-	//		}
-	//	}
-	//}
-
-	//while (true)
-	//{
-	//	if (_kbhit())
-	//	{
-	//		if (GetAsyncKeyState(0x41))
-	//		{
-	//			HANDLE hOut;
-	//			COORD Position;
-	//			hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	//			Position.X = 12;
-	//			Position.Y = 51;
-	//			SetConsoleCursorPosition(hOut, Position);
-	//			SetConsoleTextAttribute(hOut, 17);
-	//			printf("%c", ' ');
-	//		}
-
-	//		if (GetAsyncKeyState(0x53))
-	//		{
-	//			HANDLE hOut;
-	//			COORD Position;
-	//			hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	//			Position.X = 22;
-	//			Position.Y = 51;
-	//			SetConsoleCursorPosition(hOut, Position);
-	//			printf("%c", ' ');
-	//		}
-
-	//		if (GetAsyncKeyState(0x44))
-	//		{
-	//			HANDLE hOut;
-	//			COORD Position;
-	//			hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	//			Position.X = 32;
-	//			Position.Y = 51;
-	//			SetConsoleCursorPosition(hOut, Position);
-	//			printf("%c", ' ');
-	//		}
-
-	//		if (GetAsyncKeyState(0x46))
-	//		{
-	//			HANDLE hOut;
-	//			COORD Position;
-	//			hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	//			Position.X = 42;
-	//			Position.Y = 51;
-	//			SetConsoleCursorPosition(hOut, Position);
-	//			printf("%c", ' ');
-	//		}
-
-	//		if (GetAsyncKeyState(0x47))
-	//		{
-	//			HANDLE hOut;
-	//			COORD Position;
-	//			hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	//			Position.X = 52;
-	//			Position.Y = 51;
-	//			SetConsoleCursorPosition(hOut, Position);
-	//			printf("%c", ' ');
-	//		}
-
-	//	}
-	//}
-
-	//std::vector< std::vector<int> >::const_iterator row;
-	//std::vector<int>::const_iterator col;
-	//int it = 0;
-
-	//int length = 0;
-
-	//vector<vector<int>> test(10, vector<int>(10));
-	//vector<vector<int>> track;
-	//for (int i = 0; i < test.size(); i++)
-	//{
-	//	for (int j = 0; j < test[i].size(); j++)
-	//	{
-	//		if (i % 3 == 0)
-	//		{
-	//			test[i][j] = 12;
-	//		}
-	//		else
-	//			test[i][j] = i;
-	//		cout << test[i][j];
-	//	}
-	//	if (i % 3 == 0 && i != 0)
-	//	{
-	//		length++;
-	//	}
-	//	cout << endl;
-	//}
-
-	//cout << length << endl << endl;
-
-	//for (int k = 0; k < 2; k++)
-	//{
-	//	for (int i = k * 3 + 1; i % 3 != 0 || i == 0; i++)
-	//	{
-	//		vector<int>::const_iterator first = test[i].begin();
-	//		vector<int>::const_iterator last = test[i].end();
-	//		vector<int> tmp(first, last);
-	//		track.push_back(tmp);
-	//	}
-	//	for (int i = k * 2; i < track.size(); i++)
-	//	{
-	//		for (int j = 0; j < track[i].size(); j++)
-	//		{
-	//			cout << track[i][j];
-	//		}
-	//		cout << endl;
-	//	}
-	//	cout << endl;
-	//}
 	
 	system("pause");
 }
@@ -349,6 +125,7 @@ void Game::init()
 
 void Game::mainL()
 {
+	PlaySound(TEXT("Clannad_Ending.wav"), NULL, SND_ASYNC);
 	bool loop = true;
 	drawAll();
 	while (loop == true)
@@ -356,7 +133,7 @@ void Game::mainL()
 		updateBuffer();
 		move();
 		input();
-		Sleep(0);
+		Sleep(100);
 		selDraw();
 	}
 }
@@ -371,6 +148,7 @@ void Game::input()
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xCC);
 			printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			//checkHit(t.notes[0]);
 		}
 		else
 		{
@@ -384,12 +162,14 @@ void Game::input()
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x99);
 			printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			//checkHit(t.notes[1]);
 		}
 		else
 		{
 			gotoxy(49, 18);
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
 			printf(" ");
+
 		}
 		if (GetAsyncKeyState(0x44))
 		{
@@ -397,6 +177,7 @@ void Game::input()
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xAA);
 			printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			//checkHit(t.notes[2]);
 		}
 		else
 		{
@@ -410,6 +191,7 @@ void Game::input()
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xEE);
 			printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			//checkHit(t.notes[3]);
 		}
 		else
 		{
@@ -423,6 +205,7 @@ void Game::input()
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xDD);
 			printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			//checkHit(t.notes[4]);
 		}
 		else
 		{
@@ -560,6 +343,7 @@ void Game::move()
 				//t.notes[i].erase(t.notes[i].begin() + j);
 				delete t.notes[i][j];
 				t.notes[i].erase(t.notes[i].begin() + j);
+				t.notes[i].resize(t.notes[i].size() - 1);
 			}
 			else
 			{
@@ -577,6 +361,7 @@ void Game::move()
 			}
 		}
 	}
+
 
 	if (timer != t.track.size())
 	{
@@ -689,6 +474,27 @@ void Game::updateBuffer()
 		for (int j = 0; j < boar[i].size(); j++)
 		{
 			buffe[i][j] = boar[i][j];
+		}
+	}
+}
+
+void Game::checkHit(vector<Note*> notes)
+{
+	for (int i = 0; i < notes.size(); i++)
+	{
+		if (notes[i]->getX() >= 49 && notes[i]->getX() <= 53)
+		{
+			int x = notes[i]->getX();
+			int y = notes[i]->getY();
+			for (int i = 0; i < 9; i++)
+			{
+				boar[x][y + i] = ' ';
+				boar[x + 1][y + i] = ' ';
+				boar[x + 2][y + i] = ' ';
+			}
+			//delete notes[i];
+			notes.erase(notes.begin() + i);
+			notes.resize(notes.size() - 1);
 		}
 	}
 }

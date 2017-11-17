@@ -16,7 +16,6 @@ using namespace std;
 
 class Game
 {
-	char board[55][52], buffer[55][52];
 	vector<vector<char>> boar, buffe;
 	char Player;
 	int plX, plY;
@@ -32,6 +31,7 @@ private:
 	void drawAll();
 	void selDraw();
 	void updateBuffer();
+	void checkHit(vector<Note*> notes);
 	float noteTimer;
 	int timer;
 	bool keyDown[5];
