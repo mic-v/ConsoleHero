@@ -27,10 +27,12 @@ public:
 	void init();
 	void mainL();
 private:
+	void input();
 	void move();
 	void drawAll();
 	void selDraw();
 	void updateBuffer();
 	float noteTimer;
 	int timer;
+	bool keyDown[5];
 };

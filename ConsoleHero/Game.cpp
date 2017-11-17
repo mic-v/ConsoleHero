@@ -55,7 +55,11 @@ int main()
 	HWND console = GetConsoleWindow();
 	RECT r;
 	GetWindowRect(console, &r); //stores the console's current dimensions
-	MoveWindow(console, 250, 20, 1400, 1000, TRUE); // 800 width, 100 height
+	MoveWindow(console, 250, 20, 950, 1000, TRUE); // 800 width, 100 height
+	CONSOLE_CURSOR_INFO ci;
+	ci.dwSize = 25;
+	ci.bVisible = FALSE;
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &ci);
 	//while (menuRunning)
 	//{
 	//	menu();
@@ -351,59 +355,134 @@ void Game::mainL()
 	{
 		updateBuffer();
 		move();
-		Sleep(60);
+		input();
+		Sleep(0);
 		selDraw();
+	}
+}
+
+void Game::input()
+{
+	if (_kbhit())
+	{
+		if (GetAsyncKeyState(0x41))
+		{
+			gotoxy(49, 8);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xCC);
+			printf(" ");
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+		}
+		else
+		{
+			gotoxy(49, 8);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			printf(" ");
+		}
+		if (GetAsyncKeyState(0x53))
+		{
+			gotoxy(49, 18);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x99);
+			printf(" ");
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+		}
+		else
+		{
+			gotoxy(49, 18);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			printf(" ");
+		}
+		if (GetAsyncKeyState(0x44))
+		{
+			gotoxy(49, 28);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xAA);
+			printf(" ");
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+		}
+		else
+		{
+			gotoxy(49, 28);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			printf(" ");
+		}
+		if (GetAsyncKeyState(0x46))
+		{
+			gotoxy(49, 38);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xEE);
+			printf(" ");
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+		}
+		else
+		{
+			gotoxy(49, 38);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			printf(" ");
+		}
+		if (GetAsyncKeyState(0x47))
+		{
+			gotoxy(49, 48);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xDD);
+			printf(" ");
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+		}
+		else
+		{
+			gotoxy(49, 48);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			printf(" ");
+		}
 	}
 }
 
 void Game::move()
 {
-
-	if (noteTimer == 0.0f)
+	if (timer != t.track.size())
 	{
-		noteTimer += t.trackRatio;
-		for (int i = 0; i < 5; i++)
+		if (noteTimer == 0.0f)
 		{
-			if (t.track[timer][i] == 1)
+			noteTimer += t.trackRatio;
+			for (int i = 0; i < 5; i++)
 			{
-				if (i == 0)
+				if (t.track[timer][i] == 1)
 				{
-					Note * a = new Note();
-					a->setXY(1, 8);
-					t.A.push_back(a);
-					t.notes[3].push_back(a);
-				}
-				if (i == 1)
-				{
-					Note * s = new Note();
-					s->setXY(1, 18);
-					t.S.push_back(s);
-					t.notes[3].push_back(s);
-				}
-				if (i == 2)
-				{
-					Note * d = new Note();
-					d->setXY(1, 28);
-					t.D.push_back(d);
-					t.notes[3].push_back(d);
-				}
-				if (i == 3)
-				{
-					Note * f = new Note();
-					f->setXY(1, 38);
-					t.notes[3].push_back(f);
-				}
-				if (i == 4)
-				{
-					Note * g = new Note();
-					g->setXY(1, 48);
-					t.notes[4].push_back(g);
+					if (i == 0)
+					{
+						Note * a = new Note();
+						a->setXY(1, 8);
+						t.A.push_back(a);
+						t.notes[3].push_back(a);
+					}
+					if (i == 1)
+					{
+						Note * s = new Note();
+						s->setXY(1, 18);
+						t.S.push_back(s);
+						t.notes[3].push_back(s);
+					}
+					if (i == 2)
+					{
+						Note * d = new Note();
+						d->setXY(1, 28);
+						t.D.push_back(d);
+						t.notes[3].push_back(d);
+					}
+					if (i == 3)
+					{
+						Note * f = new Note();
+						f->setXY(1, 38);
+						t.notes[3].push_back(f);
+					}
+					if (i == 4)
+					{
+						Note * g = new Note();
+						g->setXY(1, 48);
+						t.notes[4].push_back(g);
+					}
 				}
 			}
 		}
+		else
+			noteTimer += t.trackRatio;
 	}
-	else
-		noteTimer += t.trackRatio;
 
 	for (int i = 0; i < t.notes.size(); i++)
 	{
@@ -417,6 +496,7 @@ void Game::move()
 				{
 					boar[x+3][y + i] = topBottom[i];
 				}
+				t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
 			}
 			else if (t.notes[i][j]->getX() == 2)
 			{
@@ -428,6 +508,7 @@ void Game::move()
 					boar[x + 2][y + i] = middle[i];
 					boar[x + 3][y + i] = topBottom[i];
 				}
+				t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
 			}
 			else if (t.notes[i][j]->getX() == 3)
 			{
@@ -441,6 +522,44 @@ void Game::move()
 					boar[x + 1][y] = ' ';
 					boar[x + 2][y] = ' ';
 				}
+				t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+			}
+			else if (t.notes[i][j]->getX() == 55)
+			{
+				int x = t.notes[i][j]->getX();
+				int y = t.notes[i][j]->getY();
+				for (int i = 0; i < 9; i++)
+				{
+					boar[x][y + i] = ' ';
+					boar[x + 1][y + i] = topBottom[i];
+					boar[x + 2][y + i] = middle[i];
+					//boar[x + 2][y + i] = middle[i];
+					//boar[x + 1][y] = ' ';
+				}
+				t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+			}
+			else if (t.notes[i][j]->getX() == 56)
+			{
+				int x = t.notes[i][j]->getX();
+				int y = t.notes[i][j]->getY();
+				for (int i = 0; i < 9; i++)
+				{
+					boar[x][y + i] = ' ';
+					boar[x + 1][y + i] = topBottom[i];
+				}
+				t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
+			}
+			else if (t.notes[i][j]->getX() == 57)
+			{
+				int x = t.notes[i][j]->getX();
+				int y = t.notes[i][j]->getY();
+				for (int i = 0; i < 9; i++)
+				{
+					boar[x][y + i] = ' ';
+				}
+				//t.notes[i].erase(t.notes[i].begin() + j);
+				delete t.notes[i][j];
+				t.notes[i].erase(t.notes[i].begin() + j);
 			}
 			else
 			{
@@ -454,15 +573,18 @@ void Game::move()
 					boar[x][y + i] = ' ';
 
 				}
+				t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
 			}
-			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
 		}
 	}
 
-	if (noteTimer >= 1.0f)
+	if (timer != t.track.size())
 	{
-		noteTimer = 0.0f;
-		timer++;
+		if (noteTimer >= 1.0f)
+		{
+			noteTimer = 0.0f;
+			timer++;
+		}
 	}
 
 }
