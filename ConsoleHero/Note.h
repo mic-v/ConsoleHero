@@ -9,6 +9,7 @@ class Note
 {
 public:
 	Note();
+	Note(int l);
 	~Note();
 	void setXY(int, int);
 	int getX();
@@ -17,6 +18,7 @@ private:
 	vector<vector<int>> coords;
 	string beat[3];
 	int type;
+	int length;
 	int nX, nY;
 	bool loadTime;
 };

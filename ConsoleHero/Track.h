@@ -25,7 +25,6 @@ public:
 	vector<Note*> S;
 	vector<Note*> D;
 	vector<Note*> F;
-	vector<Note*> G;
 	vector<vector<Note*>> notes;
 	vector<vector<int>> board, buffer, nextBoard;
 	float trackRatio;

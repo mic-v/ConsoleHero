@@ -25,6 +25,8 @@ public:
 	~Game();
 	void init();
 	void mainL();
+	HANDLE wHnd;
+	HANDLE rHnd;
 private:
 	void input();
 	void move();

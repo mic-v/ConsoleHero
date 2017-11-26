@@ -2,9 +2,14 @@
 
 Note::Note()
 {
-	beat[0] = " +-----+ ";
-	beat[1] = " |     | ";
-	beat[2] = " +-----+ ";
+	type = 1; //single beat
+	length = 1;
+}
+
+Note::Note(int l)
+{
+	type = 2; //long beat
+	length = l; //beat length
 }
 
 Note::~Note()
@@ -15,13 +20,6 @@ void Note::setXY(int x, int y)
 {
 	nX = x;
 	nY = y;
-	for (int i = 0; i < 3; i++)
-	{
-		vector<int> tmp(2);
-		coords.push_back(tmp);
-		coords[i][0] = x + i;
-		coords[i][1] = y;
-	}
 }
 
 int Note::getX()

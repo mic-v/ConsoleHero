@@ -3,12 +3,11 @@
 Track::Track()
 {
 	trackLength = 0;
-	trackRatio = 18.0f / 54.0f;
+	trackRatio = 15.0f / 30.0f;
 	notes.push_back(A);
 	notes.push_back(S);
 	notes.push_back(D);
 	notes.push_back(F);
-	notes.push_back(G);
 }
 
 Track::~Track()
@@ -17,7 +16,7 @@ Track::~Track()
 
 void Track::readTrack()
 {
-	ifstream myfile("Tracks/TrackOne.txt");
+	ifstream myfile("Tracks/Track3.txt");
 	string line;
 
 	if (myfile.is_open())
