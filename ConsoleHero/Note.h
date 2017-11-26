@@ -14,6 +14,8 @@ public:
 	void setXY(int, int);
 	int getX();
 	int getY();
+	int getLength();
+	int getType();
 private:
 	vector<vector<int>> coords;
 	string beat[3];

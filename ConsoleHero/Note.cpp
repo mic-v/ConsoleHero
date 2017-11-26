@@ -31,3 +31,13 @@ int Note::getY()
 {
 	return nY;
 }
+
+int Note::getLength()
+{
+	return length;
+}
+
+int Note::getType()
+{
+	return type;
+}

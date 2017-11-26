@@ -134,6 +134,7 @@ void Game::mainL()
 	while (loop == true)
 	{
 		updateBuffer();
+		nextLine();
 		move();
 		//input();
 		std::this_thread::sleep_for(std::chrono::milliseconds(20));
@@ -220,6 +221,11 @@ void Game::input()
 	}
 }
 
+void Game::nextLine()
+{
+
+}
+
 void Game::move()
 {
 	if (timer != t.track.size())
@@ -237,33 +243,58 @@ void Game::move()
 						if (t.track[timer][i] != 1)
 						{
 							a = new Note(t.track[timer][i]);
+							a->setXY(1 - a->getLength(), 27);
 						}
 						else
 						{
 							a = new Note();
 							a->setXY(1, 27);
 						}
-						t.A.push_back(a);
 						t.notes[0].push_back(a);
 					}
 					if (i == 1)
 					{
-						Note * s = new Note();
-						s->setXY(1, 32);
-						t.S.push_back(s);
+						Note * s;
+						if (t.track[timer][i] != 1)
+						{
+							s = new Note(t.track[timer][i]);
+							s->setXY(1 - s->getLength(), 27);
+						}
+						else
+						{
+							s = new Note();
+							s->setXY(1, 27);
+						}
 						t.notes[1].push_back(s);
 					}
 					if (i == 2)
 					{
-						Note * d = new Note();
-						d->setXY(1, 37);
-						t.D.push_back(d);
+						Note * d;
+						if (t.track[timer][i] != 1)
+						{
+							d = new Note(t.track[timer][i]);
+							d->setXY(1 - d->getLength(), 27);
+						}
+						else
+						{
+							d = new Note();
+							d->setXY(1, 27);
+						}
 						t.notes[2].push_back(d);
 					}
 					if (i == 3)
 					{
-						Note * f = new Note();
-						f->setXY(1, 42);
+						Note * f;
+						if (t.track[timer][i] != 1)
+						{
+							f = new Note(t.track[timer][i]);
+							f->setXY(1 - f->getLength(), 27);
+						}
+						else
+						{
+							f = new Note();
+							f->setXY(1, 27);
+						}
 						t.notes[3].push_back(f);
 					}
 				}
@@ -369,82 +400,158 @@ void Game::move()
 
 		while (it != t.notes[i].end())
 		{
-			if ((*it)->getX() == 1)
+			if ((*it)->getType() == 1)
 			{
-				int x = (*it)->getX();
-				int y = (*it)->getY();
-				for (int i = 0; i < 2; i++)
+				if ((*it)->getX() == 1)
 				{
-					boar[x + 1][y + i] = partBot[i];
+					int x = (*it)->getX();
+					int y = (*it)->getY();
+					for (int i = 0; i < 2; i++)
+					{
+						boar[x + 1][y + i] = partBot[i];
+					}
+					(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+					it++;
 				}
-				(*it)->setXY((*it)->getX() + 1, (*it)->getY());
-				it++;
-			}
-			else if ((*it)->getX() == 2)
-			{
-				int x = (*it)->getX();
-				int y = (*it)->getY();
-				for (int i = 0; i < 2; i++)
+				else if ((*it)->getX() == 2)
 				{
-					boar[x][y + i] = ' ';
-					boar[x + 1][y + i] = part[i];
-					boar[x + 2][y + i] = partBot[i];
+					int x = (*it)->getX();
+					int y = (*it)->getY();
+					for (int i = 0; i < 2; i++)
+					{
+						boar[x][y + i] = ' ';
+						boar[x + 1][y + i] = part[i];
+						boar[x + 2][y + i] = partBot[i];
+					}
+					(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+					it++;
 				}
-				(*it)->setXY((*it)->getX() + 1, (*it)->getY());
-				it++;
+				//else if ((*it)->getX() == 3)
+				//{
+				//	int x = (*it)->getX();
+				//	int y = (*it)->getY();
+				//	for (int i = 0; i < 9; i++)
+				//	{
+				//		boar[x + 1][y + i] = topBottom[i];
+				//		//boar[x + 2][y + i] = middle[i];
+				//		//boar[x + 3][y + i] = topBottom[i];
+				//		//boar[x + 1][y] = ' ';
+				//		boar[x + 2][y] = ' ';
+				//	}
+				//	(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+				//	it++;
+				//}
+				else if ((*it)->getX() == 30)
+				{
+					int x = (*it)->getX();
+					int y = (*it)->getY();
+					for (int i = 0; i < 2; i++)
+					{
+						boar[x][y + i] = ' ';
+						boar[x + 1][y + i] = part[i];
+					}
+					(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+					it++;
+				}
+				else if ((*it)->getX() == 31)
+				{
+					int x = (*it)->getX();
+					int y = (*it)->getY();
+					for (int i = 0; i < 2; i++)
+					{
+						boar[x][y + i] = ' ';
+					}
+					delete (*it);
+					it = t.notes[i].erase(it);
+				}
+				else
+				{
+					int x = (*it)->getX();
+					int y = (*it)->getY();
+					for (int i = 0; i < 2; i++)
+					{
+						boar[x][y + i] = ' ';
+						boar[x + 1][y + i] = part[i];
+						boar[x + 2][y + i] = partBot[i];
+					}
+					(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+					it++;
+				}
 			}
-			//else if ((*it)->getX() == 3)
+			//else
 			//{
 			//	int x = (*it)->getX();
 			//	int y = (*it)->getY();
-			//	for (int i = 0; i < 9; i++)
+			//	if (x + (*it)->getLength() == 1)
 			//	{
-			//		boar[x + 1][y + i] = topBottom[i];
-			//		//boar[x + 2][y + i] = middle[i];
-			//		//boar[x + 3][y + i] = topBottom[i];
-			//		//boar[x + 1][y] = ' ';
-			//		boar[x + 2][y] = ' ';
+			//		for (int i = 0; i < 2; i++)
+			//		{
+			//			boar[x][y + i] = ' ';
+			//			boar[x + 1][y + i] = partBot[i];
+			//		}
+			//		(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+			//		it++;
 			//	}
-			//	(*it)->setXY((*it)->getX() + 1, (*it)->getY());
-			//	it++;
+			//	if (x != 1)
+			//	{
+			//		for (int i = (*it)->getLength(); i >= 0; i--)
+			//		{
+			//			if (x + i > 1)
+			//			{
+			//				if (i == (*it)->getLength())
+			//				{
+			//					for (int j = 0; j < 2; j++)
+			//					{
+			//						boar[x + i][y + j] = partBot[j];
+			//					}
+			//				}
+			//				else
+			//				{
+			//					for (int j = 0; j < 2; j++)
+			//					{
+			//						boar[x + i][y + j] = partMid[j];
+			//					}
+			//				}
+			//			}
+			//			if (i == 0)
+			//			{
+			//				for (int j = 0; j < 2; j++)
+			//				{
+			//					boar[x ][y + j] = partBot[j];
+			//				}
+			//			}
+			//		}
+			//		(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+			//		it++;
+			//	}
+			//	else
+			//	{
+			//		if (x > 1 && x < 32)
+			//		{
+			//			for(int i = 0; i < 2; i++)
+			//				boar[x][y + i] = partMid[i];
+			//		}
+			//		for (int i = 0; i < (*it)->getLength(); ++i)
+			//		{
+			//			if (x + i > 1 && x + i < 32)
+			//			{
+			//				for (int j = 0; j < 2; ++j)
+			//				{
+			//					if (i == 0)
+			//						boar[x + i + 1][y + j] = part[j];
+			//					else if (i == (*it)->getLength() - 1)
+			//						boar[x + i + 1][y + j] = partBot[j];
+			//					else
+			//						boar[x + i + 1][y + j] = partMid[j];
+			//				}
+			//			}
+			//		}
+			//		(*it)->setXY((*it)->getX() + 1, (*it)->getY());
+			//		it++;
+			//	}
 			//}
-			else if ((*it)->getX() == 30)
-			{
-				int x = (*it)->getX();
-				int y = (*it)->getY();
-				for (int i = 0; i < 2; i++)
-				{
-					boar[x][y + i] = ' ';
-					boar[x + 1][y + i] = part[i];
-				}
-				(*it)->setXY((*it)->getX() + 1, (*it)->getY());
-				it++;
-			}
-			else if ((*it)->getX() == 31)
-			{
-				int x = (*it)->getX();
-				int y = (*it)->getY();
-				for (int i = 0; i < 2; i++)
-				{
-					boar[x][y + i] = ' ';
-				}
-				delete (*it);
-				it = t.notes[i].erase(it);
-			}
-			else
-			{
-				int x = (*it)->getX();
-				int y = (*it)->getY();
-				for (int i = 0; i < 2; i++)
-				{
-					boar[x][y + i] = ' ';
-					boar[x + 1][y + i] = part[i];
-					boar[x + 2][y + i] = partBot[i];
-				}
-				(*it)->setXY((*it)->getX() + 1, (*it)->getY());
-				it++;
-			}
 		}
+
 	}
 
 	if (timer != t.track.size())

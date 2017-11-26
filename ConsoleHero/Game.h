@@ -29,6 +29,7 @@ public:
 	HANDLE rHnd;
 private:
 	void input();
+	void nextLine();
 	void move();
 	void drawAll();
 	void selDraw();
