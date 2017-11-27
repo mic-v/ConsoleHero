@@ -9,13 +9,13 @@ class Note
 {
 public:
 	Note();
-	Note(int l);
 	~Note();
 	void setXY(int, int);
 	int getX();
 	int getY();
 	int getLength();
 	int getType();
+	void setLength(int l);
 private:
 	vector<vector<int>> coords;
 	string beat[3];

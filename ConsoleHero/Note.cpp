@@ -6,12 +6,6 @@ Note::Note()
 	length = 1;
 }
 
-Note::Note(int l)
-{
-	type = 2; //long beat
-	length = l; //beat length
-}
-
 Note::~Note()
 {
 }
@@ -40,4 +34,10 @@ int Note::getLength()
 int Note::getType()
 {
 	return type;
+}
+
+void Note::setLength(int l)
+{
+	length = l;
+	type = 2;
 }
