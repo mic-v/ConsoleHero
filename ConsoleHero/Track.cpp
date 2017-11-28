@@ -32,16 +32,24 @@ void Track::readTrack()
 				track[i][j] = tmp;
 			}
 		}
-
-		int j = 0;
-		for (int i = 0; i < track.size(); i++)
+		for (int i = 0; i <= track.size(); i++)
 		{
-			if (i % 19 == 0)
+			if (i % 15 == 0)
 			{
-				track.erase(track.begin() + i - j);
-				j++;
+				//cout << i << std::endl;
+				track.erase(track.begin() + i);
 			}
 		}
+
+		//int j = 0;
+		//for (auto it = track.begin(); it != track.end(); it++)
+		//{
+		//	if (j % 16 == 0)
+		//	{
+		//		track.erase(it);
+		//	}
+		//	j++;
+		//}
 		trackLength = track.size();
 	}
 	myfile.close();

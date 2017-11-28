@@ -7,9 +7,12 @@
 #include <vector>
 #include "Track.h"
 
-#define EASY 35
-#define MEDIUM 30
+#define EASY 50
+#define MEDIUM 40
 #define HARD 20
+
+#define GOODHIT 30
+#define BADHIT 10
 
 
 using namespace std;

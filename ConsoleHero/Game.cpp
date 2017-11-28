@@ -14,6 +14,7 @@ char part[] = { '/','\\' };
 char partMid[] = { '|','|' };
 char partBot[] = { '\\','/' };
 
+char shit = false;
 
 void menu()
 {
@@ -88,6 +89,16 @@ int main()
 	//	}
 	//}
 
+	//Track t;
+	//t.readTrack();
+	//for (int i = 0; i < t.track.size(); i++)
+	//{
+	//	for (int j = 0; j < t.track[i].size(); j++)
+	//	{
+	//		cout << t.track[i][j];
+	//	}
+	//	cout << endl;
+	//}
 	Game g;
 	g.init();
 	g.mainL();
@@ -135,12 +146,11 @@ void Game::mainL()
 	while (loop == true)
 	{
 		updateBuffer();
+		input();
 		nextLine();
 		move();
-		input();
-		std::this_thread::sleep_for(std::chrono::milliseconds(80));
 		selDraw();
-
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	}
 }
 
@@ -148,16 +158,16 @@ void Game::input()
 {
 	if (_kbhit())
 	{
-		if (GetAsyncKeyState(0x41))
+		if (GetAsyncKeyState(0x41) && GetAsyncKeyState(VK_RETURN))
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xCC);
-			gotoxy(29, 27);
+			gotoxy(29, 26);
 			printf(" ");
-			gotoxy(29, 28);
+			gotoxy(29, 29);
 			printf(" ");
-			gotoxy(30, 27);
+			gotoxy(30, 26);
 			printf(" ");
-			gotoxy(30, 28);
+			gotoxy(30, 29);
 			printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
 			checkHit(t.notes[0]);
@@ -165,25 +175,25 @@ void Game::input()
 		else
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
-			gotoxy(29, 27);
+			gotoxy(29, 26);
 			printf(" ");
-			gotoxy(29, 28);
+			gotoxy(29, 29);
 			printf(" ");
-			gotoxy(30, 27);
+			gotoxy(30, 26);
 			printf(" ");
-			gotoxy(30, 28);
+			gotoxy(30, 29);
 			printf(" ");
 		}
-		if (GetAsyncKeyState(0x53))
+		if (GetAsyncKeyState(0x53) && GetAsyncKeyState(VK_RETURN))
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x99);
-			gotoxy(29, 32);
+			gotoxy(29, 31);
 			printf(" ");
-			gotoxy(29, 33);
+			gotoxy(29, 34);
 			printf(" ");
-			gotoxy(30, 32);
+			gotoxy(30, 31);
 			printf(" ");
-			gotoxy(30, 33);
+			gotoxy(30, 34);
 			printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
 			checkHit(t.notes[1]);
@@ -191,51 +201,44 @@ void Game::input()
 		else
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
-			gotoxy(29, 32);
+			gotoxy(29, 31);
 			printf(" ");
-			gotoxy(29, 33);
-			printf(" ");
-			gotoxy(30, 32);
-			printf(" ");
-			gotoxy(30, 33);
-			printf(" ");
+			gotoxy(29, 34);		printf(" ");
+			gotoxy(30, 31);		printf(" ");
+			gotoxy(30, 34);		printf(" ");
 		}
-		if (GetAsyncKeyState(0x44))
+		if (GetAsyncKeyState(0x44) && GetAsyncKeyState(VK_RETURN))
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xEE);
-			gotoxy(29, 37);
-			printf(" ");
-			gotoxy(29, 38);
-			printf(" ");
-			gotoxy(30, 37);
-			printf(" ");
-			gotoxy(30, 38);
-			printf(" ");
+			gotoxy(29, 36); 	printf(" ");
+			gotoxy(29, 39); 	printf(" ");
+			gotoxy(30, 36); 	printf(" ");
+			gotoxy(30, 39);     printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
 			checkHit(t.notes[2]);
 		}
 		else
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
-			gotoxy(29, 37);
+			gotoxy(29, 36);
 			printf(" ");
-			gotoxy(29, 38);
+			gotoxy(29, 39);
 			printf(" ");
-			gotoxy(30, 37);
+			gotoxy(30, 36);
 			printf(" ");
-			gotoxy(30, 38);
+			gotoxy(30, 39);
 			printf(" ");
 		}
-		if (GetAsyncKeyState(0x46))
+		if (GetAsyncKeyState(0x46) && GetAsyncKeyState(VK_RETURN))
 		{
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xEE);
-			gotoxy(29, 42);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xAA);
+			gotoxy(29, 41);
 			printf(" ");
-			gotoxy(29, 43);
+			gotoxy(29, 44);
 			printf(" ");
-			gotoxy(30, 42);
+			gotoxy(30, 41);
 			printf(" ");
-			gotoxy(30, 43);
+			gotoxy(30, 44);
 			printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
 			checkHit(t.notes[3]);
@@ -243,13 +246,13 @@ void Game::input()
 		else
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
-			gotoxy(29, 42);
+			gotoxy(29, 41);
 			printf(" ");
-			gotoxy(29, 43);
+			gotoxy(29, 44);
 			printf(" ");
-			gotoxy(30, 42);
+			gotoxy(30, 41);
 			printf(" ");
-			gotoxy(30, 43);
+			gotoxy(30, 44);
 			printf(" ");
 		}
 	}
@@ -274,7 +277,7 @@ void Game::move()
 					if (i == 0)
 					{
 						Note * a = new Note();
-						if (t.track[timer][i] != 1)
+						if (t.track[timer][i] > 1)
 						{
 							a->setXY(1 - a->getLength(), 27);
 							a->setLength(t.track[timer][i]);
@@ -288,7 +291,7 @@ void Game::move()
 					if (i == 1)
 					{
 						Note * s = new Note();
-						if (t.track[timer][i] != 1)
+						if (t.track[timer][i] > 1)
 						{
 							s->setLength(t.track[timer][i]);
 							s->setXY(1 - s->getLength(), 32);
@@ -302,7 +305,7 @@ void Game::move()
 					if (i == 2)
 					{
 						Note * d = new Note();
-						if (t.track[timer][i] != 1)
+						if (t.track[timer][i] > 1)
 						{
 							d->setLength(t.track[timer][i]);
 							d->setXY(1 - d->getLength(), 37);
@@ -316,7 +319,7 @@ void Game::move()
 					if (i == 3)
 					{
 						Note * f = new Note();
-						if (t.track[timer][i] != 1)
+						if (t.track[timer][i] > 1)
 						{
 							f->setLength(t.track[timer][i]);
 							f->setXY(1 - f->getLength(), 42);
@@ -337,151 +340,45 @@ void Game::move()
 	for (int i = 0; i < 4; i++)
 	{
 		auto it = t.notes[i].begin();
-		//	for (int j = 0; j < t.notes[i].size(); j++)
-		//	{
-		//		if (t.notes[i][j]->getX() == 1)
-		//		{
-		//			int x = t.notes[i][j]->getX();
-		//			int y = t.notes[i][j]->getY();
-		//			for (int i = 0; i < 9; i++)
-		//			{
-		//				boar[x + 3][y + i] = topBottom[i];
-		//			}
-		//			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
-		//		}
-		//		else if (t.notes[i][j]->getX() == 2)
-		//		{
-		//			int x = t.notes[i][j]->getX();
-		//			int y = t.notes[i][j]->getY();
-		//			for (int i = 0; i < 9; i++)
-		//			{
-		//				boar[x][y] = ' ';
-		//				boar[x + 2][y + i] = middle[i];
-		//				boar[x + 3][y + i] = topBottom[i];
-		//			}
-		//			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
-		//		}
-		//		else if (t.notes[i][j]->getX() == 3)
-		//		{
-		//			int x = t.notes[i][j]->getX();
-		//			int y = t.notes[i][j]->getY();
-		//			for (int i = 0; i < 9; i++)
-		//			{
-		//				boar[x + 1][y + i] = topBottom[i];
-		//				boar[x + 2][y + i] = middle[i];
-		//				boar[x + 3][y + i] = topBottom[i];
-		//				boar[x + 1][y] = ' ';
-		//				boar[x + 2][y] = ' ';
-		//			}
-		//			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
-		//		}
-		//		else if (t.notes[i][j]->getX() == 55)
-		//		{
-		//			int x = t.notes[i][j]->getX();
-		//			int y = t.notes[i][j]->getY();
-		//			for (int i = 0; i < 9; i++)
-		//			{
-		//				boar[x][y + i] = ' ';
-		//				boar[x + 1][y + i] = topBottom[i];
-		//				boar[x + 2][y + i] = middle[i];
-		//				//boar[x + 2][y + i] = middle[i];
-		//				//boar[x + 1][y] = ' ';
-		//			}
-		//			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
-		//		}
-		//		else if (t.notes[i][j]->getX() == 56)
-		//		{
-		//			int x = t.notes[i][j]->getX();
-		//			int y = t.notes[i][j]->getY();
-		//			for (int i = 0; i < 9; i++)
-		//			{
-		//				boar[x][y + i] = ' ';
-		//				boar[x + 1][y + i] = topBottom[i];
-		//			}
-		//			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
-		//		}
-		//		else if (t.notes[i][j]->getX() == 57)
-		//		{
-		//			int x = t.notes[i][j]->getX();
-		//			int y = t.notes[i][j]->getY();
-		//			for (int i = 0; i < 9; i++)
-		//			{
-		//				boar[x][y + i] = ' ';
-		//			}
-		//			//t.notes[i].erase(t.notes[i].begin() + j);
-		//			delete t.notes[i][j];
-		//			t.notes[i].erase(t.notes[i].begin() + j);
-		//		}
-		//		else
-		//		{
-		//			int x = t.notes[i][j]->getX();
-		//			int y = t.notes[i][j]->getY();
-		//			for (int i = 0; i < 9; i++)
-		//			{
-		//				boar[x + 1][y + i] = topBottom[i];
-		//				boar[x + 2][y + i] = middle[i];
-		//				boar[x + 3][y + i] = topBottom[i];
-		//				boar[x][y + i] = ' ';
-		//			}
-		//			t.notes[i][j]->setXY(t.notes[i][j]->getX() + 1, t.notes[i][j]->getY());
-		//		}
-		//	}
-		//}
 
 		while (it != t.notes[i].end())
 		{
-			//if ((*it)->getType() == 1)
-			{
 				if ((*it)->getX() < 31)
 				{
 					int x = (*it)->getX();
 					int y = (*it)->getY();
-					for (int j = 0; j < 2; j++)
+					if ((*it)->getType() == 1)
 					{
-						if ((*it)->getType() == 1)
+						for (int j = 0; j < 2; j++)
 						{
 							if (x > 1)
 								boar[x][y + j] = ' ';
 							if (x >= 1 && x < 30)
 								boar[x + 2][y + j] = partBot[j];
-							if (x >= 1 && x < 30)
+							if (x >= 1 && x <= 30)
 								boar[x + 1][y + j] = part[j];
 						}
-						else if ((*it)->getType() > 1)
+					}
+					else if ((*it)->getType() == 2)
+					{
+						for (int j = 0; j < 2; j++)
 						{
-							if(x >1)
+							if (x > 1)
+							{
 								boar[x][y + j] = ' ';
+							}
 							for (int k = 0; k < (*it)->getLength(); ++k)
 							{
 								if (k == 0 && k + x >= 1 && k + x < 30)
 									boar[x + k + 1][y + j] = part[j];
 								else if (k == (*it)->getLength() - 1 && k + x >= 1 && k + x < 30)
 									boar[x + k + 1][y + j] = partBot[j];
-								else if(k + x >= 1 && k + x < 30)
+								else if (k + x >= 1 && k + x < 30)
 									boar[x + k + 1][y + j] = partMid[j];
 							}
 						}
-
-							//}
-								//		for (int i = 0; i < (*it)->getLength(); ++i)
-								//		{
-								//			if (x + i > 1 && x + i < 32)
-								//			{
-								//				for (int j = 0; j < 2; ++j)
-								//				{
-								//					if (i == 0)
-								//						boar[x + i + 1][y + j] = part[j];
-								//					else if (i == (*it)->getLength() - 1)
-								//						boar[x + i + 1][y + j] = partBot[j];
-								//					else
-								//						boar[x + i + 1][y + j] = partMid[j];
-								//				}
-								//			}
-								//		}
-								//		(*it)->setXY((*it)->getX() + 1, (*it)->getY());
-								//		it++;
-						//}
 					}
+
 					(*it)->setXY((*it)->getX() + 1, (*it)->getY());
 					it++;
 				}
@@ -496,140 +393,8 @@ void Game::move()
 					delete (*it);
 					it = t.notes[i].erase(it);
 				}
-				//if ((*it)->getX() == 1)
-				//{
-				//	int x = (*it)->getX();
-				//	int y = (*it)->getY();
-				//	for (int j = 0; j < 2; j++)
-				//	{
-				//		boar[x + 1][y + j] = partBot[j];
-				//	}
-				//	(*it)->setXY((*it)->getX() + 1, (*it)->getY());
-				//	it++;
-				//}
-				//else if ((*it)->getX() == 2)
-				//{
-				//	int x = (*it)->getX();
-				//	int y = (*it)->getY();
-				//	for (int j = 0; j < 2; j++)
-				//	{
-				//		boar[x + 1][y + j] = part[j];
-				//		boar[x + 2][y + j] = partBot[j];
-				//		boar[x][y + j] = ' ';
-				//	}
-				//	(*it)->setXY((*it)->getX() + 1, (*it)->getY());
-				//	it++;
-				//}
-				//else if ((*it)->getX() == 30)
-				//{
-				//	int x = (*it)->getX();
-				//	int y = (*it)->getY();
-				//	for (int j = 0; j < 2; j++)
-				//	{
-				//		boar[x][y + j] = ' ';
-				//		boar[x + 1][y + j] = part[j];
-				//	}
-				//	(*it)->setXY((*it)->getX() + 1, (*it)->getY());
-				//	it++;
-				//}
-				//else if ((*it)->getX() == 31)
-				//{
-				//	int x = (*it)->getX();
-				//	int y = (*it)->getY();
-				//	for (int j = 0; j < 2; j++)
-				//	{
-				//		boar[x][y + j] = ' ';
-				//	}
-				//	delete (*it);
-				//	//it = t.notes[i].erase(it);
-				//}
-				//else
-				//{
-				//	int x = (*it)->getX();
-				//	int y = (*it)->getY();
-				//	for (int j = 0; j < 2; j++)
-				//	{
-				//		boar[x][y + j] = ' ';
-				//		boar[x + 1][y + j] = part[j];
-				//		boar[x + 2][y + j] = partBot[j];
-				//	}
-				//	(*it)->setXY((*it)->getX() + 1, (*it)->getY());
-				//	it++;
-				//}
+
 			}
-			//else
-			//{
-			//	int x = (*it)->getX();
-			//	int y = (*it)->getY();
-			//	if (x + (*it)->getLength() == 1)
-			//	{
-			//		for (int i = 0; i < 2; i++)
-			//		{
-			//			boar[x][y + i] = ' ';
-			//			boar[x + 1][y + i] = partBot[i];
-			//		}
-			//		(*it)->setXY((*it)->getX() + 1, (*it)->getY());
-			//		it++;
-			//	}
-			//	if (x != 1)
-			//	{
-			//		for (int i = (*it)->getLength(); i >= 0; i--)
-			//		{
-			//			if (x + i > 1)
-			//			{
-			//				if (i == (*it)->getLength())
-			//				{
-			//					for (int j = 0; j < 2; j++)
-			//					{
-			//						boar[x + i][y + j] = partBot[j];
-			//					}
-			//				}
-			//				else
-			//				{
-			//					for (int j = 0; j < 2; j++)
-			//					{
-			//						boar[x + i][y + j] = partMid[j];
-			//					}
-			//				}
-			//			}
-			//			if (i == 0)
-			//			{
-			//				for (int j = 0; j < 2; j++)
-			//				{
-			//					boar[x ][y + j] = partBot[j];
-			//				}
-			//			}
-			//		}
-			//		(*it)->setXY((*it)->getX() + 1, (*it)->getY());
-			//		it++;
-			//	}
-			//	else
-			//	{
-			//		if (x > 1 && x < 32)
-			//		{
-			//			for(int i = 0; i < 2; i++)
-			//				boar[x][y + i] = partMid[i];
-			//		}
-			//		for (int i = 0; i < (*it)->getLength(); ++i)
-			//		{
-			//			if (x + i > 1 && x + i < 32)
-			//			{
-			//				for (int j = 0; j < 2; ++j)
-			//				{
-			//					if (i == 0)
-			//						boar[x + i + 1][y + j] = part[j];
-			//					else if (i == (*it)->getLength() - 1)
-			//						boar[x + i + 1][y + j] = partBot[j];
-			//					else
-			//						boar[x + i + 1][y + j] = partMid[j];
-			//				}
-			//			}
-			//		}
-			//		(*it)->setXY((*it)->getX() + 1, (*it)->getY());
-			//		it++;
-			//	}
-			//}
-		}
 
 	}
 
@@ -654,62 +419,6 @@ void Game::drawAll()
 		printf("\n");
 	}
 
-	/*for (int i = 0; i < t.track.size(); i++)
-	{
-		for (int j = 0; j < t.track[i].size(); j++)
-		{
-			if (t.track[i][j] == 0)
-				continue;
-			else
-			{
-				if (j == 0)
-				{
-					gotoxy(i * 3 + 4, j * 10 + 8);
-					printf("%s", beatNote1.c_str());
-					gotoxy(i * 3 + 5,j * 10 + 8);
-					printf("%s", beatNote2.c_str());
-					gotoxy(i * 3 + 6,j * 10 + 8);
-					printf("%s", beatNote3.c_str());
-				}
-				if (j == 1)
-				{
-					gotoxy(i * 3 + 4, j * 10 + 8);
-					printf("%s", beatNote1.c_str());
-					gotoxy(i * 3 + 5, j * 10 + 8);
-					printf("%s", beatNote2.c_str());
-					gotoxy(i * 3 + 6, j * 10 + 8);
-					printf("%s", beatNote3.c_str());
-				}
-				if (j == 2)
-				{
-					gotoxy(i * 3 + 4, j * 10 + 8);
-					printf("%s", beatNote1.c_str());
-					gotoxy(i * 3 + 5, j * 10 + 8);
-					printf("%s", beatNote2.c_str());
-					gotoxy(i * 3 + 6, j * 10 + 8);
-					printf("%s", beatNote3.c_str());
-				}
-				if (j == 3)
-				{
-					gotoxy(i * 3 + 4, j * 10 + 8);
-					printf("%s", beatNote1.c_str());
-					gotoxy(i * 3 + 5, j * 10 + 8);
-					printf("%s", beatNote2.c_str());
-					gotoxy(i * 3 + 6, j * 10 + 8);
-					printf("%s", beatNote3.c_str());
-				}
-				if (j == 4)
-				{
-					gotoxy(i * 3 + 4, j * 10 + 8);
-					printf("%s", beatNote1.c_str());
-					gotoxy(i * 3 + 5, j * 10 + 8);
-					printf("%s", beatNote2.c_str());
-					gotoxy(i * 3 + 6, j * 10 + 8);
-					printf("%s", beatNote3.c_str());
-				}
-			}
-		}
-	}*/
 }
 
 void Game::selDraw()
@@ -772,19 +481,22 @@ void Game::checkHit(vector<Note*> & notes)
 	size_t vec_size = 0;
 	while (it != notes.end())
 	{
-		
-		if ((*it)->getX() >= 29 && (*it)->getX() <= 30)
+		int x = (*it)->getX();
+		int y = (*it)->getY();
+		if ((*it)->getX() >= 28 && (*it)->getX() <= 30 && (*it)->getType() == 1)
 		{
-			int x = (*it)->getX();
-			int y = (*it)->getY();
-			for (int i = 0; i < 2; i++)
+			if ((*it)->getType() == 1)
 			{
-				boar[x][y + i] = ' ';
-				boar[x + 1][y + i] = ' ';
-				boar[x + 2][y + i] = ' ';
+				for (int i = 0; i < 2; i++)
+				{
+					boar[x][y + i] = ' ';
+					boar[x + 1][y + i] = ' ';
+				}
 			}
-			delete (*it);
-			it = notes.erase(it);
+			{
+				delete (*it);
+				it = notes.erase(it);
+			}
 		}
 		else
 		{
