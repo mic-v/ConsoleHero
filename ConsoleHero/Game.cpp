@@ -161,48 +161,35 @@ void Game::input()
 		if (GetAsyncKeyState(0x41) && GetAsyncKeyState(VK_RETURN))
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xCC);
-			gotoxy(29, 26);
-			printf(" ");
-			gotoxy(29, 29);
-			printf(" ");
-			gotoxy(30, 26);
-			printf(" ");
-			gotoxy(30, 29);
-			printf(" ");
+			gotoxy(29, 26);		printf(" ");
+			gotoxy(29, 29);		printf(" ");
+			gotoxy(30, 26);		printf(" ");
+			gotoxy(30, 29);		printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
 			checkHit(t.notes[0]);
 		}
 		else
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
-			gotoxy(29, 26);
-			printf(" ");
-			gotoxy(29, 29);
-			printf(" ");
-			gotoxy(30, 26);
-			printf(" ");
-			gotoxy(30, 29);
-			printf(" ");
+			gotoxy(29, 26);		printf(" ");
+			gotoxy(29, 29);		printf(" ");
+			gotoxy(30, 26);		printf(" ");
+			gotoxy(30, 29);		printf(" ");
 		}
 		if (GetAsyncKeyState(0x53) && GetAsyncKeyState(VK_RETURN))
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x99);
-			gotoxy(29, 31);
-			printf(" ");
-			gotoxy(29, 34);
-			printf(" ");
-			gotoxy(30, 31);
-			printf(" ");
-			gotoxy(30, 34);
-			printf(" ");
+			gotoxy(29, 31);		printf(" ");
+			gotoxy(29, 34);		printf(" ");
+			gotoxy(30, 31);		printf(" ");
+			gotoxy(30, 34);		printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
 			checkHit(t.notes[1]);
 		}
 		else
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
-			gotoxy(29, 31);
-			printf(" ");
+			gotoxy(29, 31);		printf(" ");
 			gotoxy(29, 34);		printf(" ");
 			gotoxy(30, 31);		printf(" ");
 			gotoxy(30, 34);		printf(" ");
@@ -220,40 +207,28 @@ void Game::input()
 		else
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
-			gotoxy(29, 36);
-			printf(" ");
-			gotoxy(29, 39);
-			printf(" ");
-			gotoxy(30, 36);
-			printf(" ");
-			gotoxy(30, 39);
-			printf(" ");
+			gotoxy(29, 36);		printf(" ");
+			gotoxy(29, 39);		printf(" ");
+			gotoxy(30, 36);		printf(" ");
+			gotoxy(30, 39);		printf(" ");
 		}
 		if (GetAsyncKeyState(0x46) && GetAsyncKeyState(VK_RETURN))
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0xAA);
-			gotoxy(29, 41);
-			printf(" ");
-			gotoxy(29, 44);
-			printf(" ");
-			gotoxy(30, 41);
-			printf(" ");
-			gotoxy(30, 44);
-			printf(" ");
+			gotoxy(29, 41);		printf(" ");
+			gotoxy(29, 44);		printf(" ");
+			gotoxy(30, 41);		printf(" ");
+			gotoxy(30, 44);		printf(" ");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
 			checkHit(t.notes[3]);
 		}
 		else
 		{
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
-			gotoxy(29, 41);
-			printf(" ");
-			gotoxy(29, 44);
-			printf(" ");
-			gotoxy(30, 41);
-			printf(" ");
-			gotoxy(30, 44);
-			printf(" ");
+			gotoxy(29, 41);		printf(" ");
+			gotoxy(29, 44);		printf(" ");
+			gotoxy(30, 41);		printf(" ");
+			gotoxy(30, 44);		printf(" ");
 		}
 	}
 }
