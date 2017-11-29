@@ -6,6 +6,7 @@
 #include <algorithm> 
 #include <iostream>
 #include "Note.h"
+#include "Track.h"
 
 using std::vector; using std::ifstream;
 using std::string; using std::cout;
