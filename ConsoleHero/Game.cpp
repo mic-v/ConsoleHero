@@ -54,57 +54,6 @@ void gotoxy(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Position);
 }
 
-//int main() 
-//{
-//
-//	HWND console = GetConsoleWindow();
-//	RECT r;
-//	GetWindowRect(console, &r); //stores the console's current dimensions
-//	MoveWindow(console, 250, 20, 950, 1000, TRUE); // 800 width, 100 height
-//	CONSOLE_CURSOR_INFO ci;
-//	ci.dwSize = 25;
-//	ci.bVisible = FALSE;
-//	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &ci);
-//	//while (menuRunning)
-//	//{
-//	//	menu();
-//	//	Sleep(10);
-//	//	char a = _getch();
-//	//	if (a == 72 && selection > 1)//up
-//	//		selection--;
-//	//	else if (a == 80 && selection < 2)//down
-//	//		selection++;
-//	//	else if (a == 13)
-//	//	{
-//	//		if (selection == 1)
-//	//		{
-//	//			cout << "xd" << endl;
-//	//		}
-//	//		else if (selection == 2)
-//	//		{
-//	//			menuRunning = false;
-//	//			continue;
-//	//		}
-//	//	}
-//	//}
-//
-//	//Track t;
-//	//t.readTrack();
-//	//for (int i = 0; i < t.track.size(); i++)
-//	//{
-//	//	for (int j = 0; j < t.track[i].size(); j++)
-//	//	{
-//	//		cout << t.track[i][j];
-//	//	}
-//	//	cout << endl;
-//	//}
-//	Game g;
-//	g.init();
-//	g.mainL();
-//	
-//	system("pause");
-//}
-
 Game::Game()
 {
 }
@@ -151,6 +100,10 @@ void Game::mainL()
 		selDraw();
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	}
+}
+
+void Game::getTracks()
+{
 }
 
 void Game::input()

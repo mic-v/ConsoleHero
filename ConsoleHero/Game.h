@@ -7,9 +7,6 @@
 #include <vector>
 #include "Track.h"
 
-#define EASY 50
-#define MEDIUM 40
-#define HARD 20
 
 #define GOODHIT 30
 #define BADHIT 10
@@ -19,17 +16,16 @@ using namespace std;
 
 class Game
 {
-	vector<vector<char>> boar, buffe;
-	char Player;
-	int plX, plY;
-	Track t;
 public:
 	Game();
 	~Game();
 	void init();
 	void mainL();
+	void getTracks();
+	vector<string> track;
 	HANDLE wHnd;
 	HANDLE rHnd;
+	Track t;
 private:
 	void input();
 	void nextLine();
@@ -38,6 +34,8 @@ private:
 	void selDraw();
 	void updateBuffer();
 	void checkHit(vector<Note*> & notes);
+	vector<vector<char>> boar, buffe;
+	char Player;
 	float noteTimer;
 	int timer;
 	bool keyDown[5];

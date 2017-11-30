@@ -12,6 +12,7 @@ public:
 	Menu();
 	~Menu();
 	void loadMenu();
+	void loadTracks();
 	void gotoxy(int x, int y);
 	bool menu;
 	bool game;

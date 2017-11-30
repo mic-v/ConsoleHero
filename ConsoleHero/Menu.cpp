@@ -1,13 +1,15 @@
 #include "Menu.h"
+#include "Game.h"
 
 Menu::Menu()
 {
 	menu = true;
 	game = false;
-	credit = false;
 	exit = false;
 	tutorial = false;
 	arrow = 0;
+
+
 }
 
 Menu::~Menu()
@@ -32,11 +34,13 @@ void Menu::loadMenu()
 	printf("Tutorial");
 
 	gotoxy(20, 18);
-	printf("Credits");
-
-	gotoxy(25, 18);
 	printf("Exit");
 	gotoxy(30, 0);
+}
+
+
+void Menu::loadTracks()
+{
 }
 
 void Menu::gotoxy(int x, int y)
