@@ -4,6 +4,7 @@ Note::Note()
 {
 	type = 1; //single beat
 	length = 1;
+	hit = false;
 }
 
 Note::~Note()

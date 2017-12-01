@@ -23,8 +23,11 @@ public:
 	~Track();
 	void readTrack();
 	void loadNextSection();
-	void setTrack(int);
+	void setTrack();
 	void setTrackNumber(int);
+	string getTrackFile();
+	int getTrackNumber();
+
 
 	int getTrackLength();
 	

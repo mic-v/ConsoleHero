@@ -19,21 +19,21 @@ Menu::~Menu()
 void Menu::loadMenu()
 {
 	printf("\n");
-	cout << " ___|)___________________________________________" << endl
-		<< "|___/____________________________________________" << endl
-		<< "|__/|___________CONSOLE__________________________" << endl
-		<< "|_/(|,\\____________________RHYTHM________________" << endl
-		<< "|_\\_|_/____________by: Iatneh____________________" << endl
+	cout << " ___|)_______________________________________________" << endl
+		<< "|___/________________________________________________" << endl
+		<< "|__/|_______________CONSOLE__________________________" << endl
+		<< "|_/(|,\\________________________RHYTHM________________" << endl
+		<< "|_\\_|_/________________by: Iatneh____________________" << endl
 		<< "|   |" << endl
 		<< "| (_|" << endl;
 
-	gotoxy(10, 18);
+	gotoxy(10, 22);
 	printf("Play");
 
-	gotoxy(15, 18);
+	gotoxy(15, 22);
 	printf("Tutorial");
 
-	gotoxy(20, 18);
+	gotoxy(20, 22);
 	printf("Exit");
 	gotoxy(30, 0);
 }
@@ -41,6 +41,13 @@ void Menu::loadMenu()
 
 void Menu::loadTracks()
 {
+}
+
+void Menu::setSong(string txt)
+{
+	//std::wstring stemp = std::wstring(txt.begin(), txt.end());
+	//LPCSTR sw = stemp.c_str();
+	PlaySound(txt.c_str() , NULL, SND_ASYNC);
 }
 
 void Menu::gotoxy(int x, int y)

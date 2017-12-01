@@ -82,28 +82,27 @@ void Track::loadNextSection()
 
 }
 
-void Track::setTrack(int difficulty)
+void Track::setTrack()
 {
 	trackFile = "Tracks/";
 	trackFile += list[trackNumber];
-	if (difficulty == 1)
-	{
-		trackFile += "_E.txt";
-	}
-	else if (difficulty == 2)
-	{
-		trackFile += "_M.txt";
-	}
-	else if (difficulty == 3)
-	{
-		trackFile += "_H.txt";
-	}
+	trackFile += ".txt";
 
 }
 
 void Track::setTrackNumber(int number)
 {
 	trackNumber = number;
+}
+
+string Track::getTrackFile()
+{
+	return trackFile;
+}
+
+int Track::getTrackNumber()
+{
+	return trackNumber;
 }
 
 int Track::getTrackLength()

@@ -16,6 +16,7 @@ public:
 	int getLength();
 	int getType();
 	void setLength(int l);
+	bool hit;
 private:
 	vector<vector<int>> coords;
 	string beat[3];

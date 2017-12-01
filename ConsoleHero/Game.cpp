@@ -15,33 +15,6 @@ char partBot[] = { '\\','/' };
 
 char shit = false;
 
-void menu()
-{
-	HANDLE text = GetStdHandle(STD_OUTPUT_HANDLE);
-	system("cls");
-	if (selection == 1)
-	{
-		SetConsoleTextAttribute(text, 11);
-		printf("Guitar Hero\n");
-		SetConsoleTextAttribute(text, 15);
-	}
-	else
-	{
-		printf("Guitar Hero\n");
-		
-	}
-
-	if (selection == 2)
-	{
-		SetConsoleTextAttribute(text, 11);
-		printf("Exit\n");
-		SetConsoleTextAttribute(text, 15);
-	}
-	else
-	{
-		printf("Exit");
-	}
-}
 
 void gotoxy(int x, int y)
 {
@@ -56,6 +29,15 @@ void gotoxy(int x, int y)
 
 Game::Game()
 {
+	playerScore = 0;
+	multiplier[0] = 1;
+	multiplier[1] = 2;
+	multiplier[2] = 3;
+	multiplier[3] = 4;
+	multiplierPlace = 0;
+	hitTotal = 0;
+	noteStreak = 0;
+	endTimer = 0;
 }
 
 Game::~Game()
@@ -82,6 +64,20 @@ void Game::init()
 			}
 		}
 	}
+	string artist = t.artist[t.getTrackNumber()];
+	string song = t.song[t.getTrackNumber()];
+	for (int i = 0; i < artist.size(); i++)
+	{
+		if (i < 12)
+			boar[26][i + 10] = artist[i];
+
+	}
+	for (int i = 0; i < song.size(); i++)
+	{
+		if (i < 21)
+			boar[27][i + 2] = song[i];
+	}
+	boar[29][50] = '0' + multiplier[multiplierPlace];
 	buffe = boar;
 	t.readTrack();
 }
@@ -89,17 +85,22 @@ void Game::init()
 void Game::mainL()
 {
 	//PlaySound(TEXT("Clannad_Ending.wav"), NULL, SND_ASYNC);
-	bool loop = true;
+	loop = true;
 	drawAll();
 	while (loop == true)
 	{
 		updateBuffer();
+		updateScore();
 		input();
 		nextLine();
 		move();
+		if (loop == false)
+			continue;
 		selDraw();
 		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	}
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	system("cls");
 }
 
 void Game::getTracks()
@@ -117,12 +118,12 @@ void Game::input()
 			gotoxy(29, 29);		printf(" ");
 			gotoxy(30, 26);		printf(" ");
 			gotoxy(30, 29);		printf(" ");
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
 			checkHit(t.notes[0]);
 		}
 		else
 		{
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
 			gotoxy(29, 26);		printf(" ");
 			gotoxy(29, 29);		printf(" ");
 			gotoxy(30, 26);		printf(" ");
@@ -135,12 +136,12 @@ void Game::input()
 			gotoxy(29, 34);		printf(" ");
 			gotoxy(30, 31);		printf(" ");
 			gotoxy(30, 34);		printf(" ");
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
 			checkHit(t.notes[1]);
 		}
 		else
 		{
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
 			gotoxy(29, 31);		printf(" ");
 			gotoxy(29, 34);		printf(" ");
 			gotoxy(30, 31);		printf(" ");
@@ -153,12 +154,12 @@ void Game::input()
 			gotoxy(29, 39); 	printf(" ");
 			gotoxy(30, 36); 	printf(" ");
 			gotoxy(30, 39);     printf(" ");
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
 			checkHit(t.notes[2]);
 		}
 		else
 		{
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
 			gotoxy(29, 36);		printf(" ");
 			gotoxy(29, 39);		printf(" ");
 			gotoxy(30, 36);		printf(" ");
@@ -171,12 +172,12 @@ void Game::input()
 			gotoxy(29, 44);		printf(" ");
 			gotoxy(30, 41);		printf(" ");
 			gotoxy(30, 44);		printf(" ");
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
 			checkHit(t.notes[3]);
 		}
 		else
 		{
-			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0F);
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x07);
 			gotoxy(29, 41);		printf(" ");
 			gotoxy(29, 44);		printf(" ");
 			gotoxy(30, 41);		printf(" ");
@@ -257,6 +258,7 @@ void Game::move()
 						}
 						t.notes[3].push_back(f);
 					}
+					noteTotal++;
 				}
 			}
 		}
@@ -319,6 +321,9 @@ void Game::move()
 					}
 					delete (*it);
 					it = t.notes[i].erase(it);
+					if (multiplierPlace > 0)
+						multiplierPlace--;
+					noteStreak = 0;
 				}
 
 			}
@@ -331,6 +336,14 @@ void Game::move()
 		{
 			noteTimer = 0.0f;
 			timer++;
+		}
+	}
+	else
+	{
+		endTimer += 1;
+		if (endTimer > 100)
+		{
+			loop = false;
 		}
 	}
 }
@@ -374,52 +387,60 @@ void Game::selDraw()
 
 void Game::updateBuffer()
 {
-	//for (int i = 0; i < boar.size(); i++)
-	//{
-	//	for (int j = 0; j < boar[i].size(); j++)
-	//	{
-	//		buffe[i][j] = boar[i][j];
-	//	}
-	//}
 	buffe = boar;
+}
+
+void Game::updateScore()
+{
+	gotoxy(29, 8);
+	printf("%15d", playerScore);
+	gotoxy(30, 9);
+	printf("%14d", noteStreak);
+	if (noteStreak > 30)
+	{
+		multiplierPlace = 3;
+	}
+	else if (noteStreak > 20)
+	{
+		multiplierPlace = 2;
+	}
+	else if (noteStreak > 10)
+	{
+		multiplierPlace = 1;
+	}
+	
 }
 
 void Game::checkHit(vector<Note*> & notes)
 {
 	auto it = notes.begin();
-	//for (int i = 0; i < notes.size(); i++)
-	//{
-	//	if (notes[i]->getX() >= 49 && notes[i]->getX() <= 53)
-	//	{
-	//		int x = notes[i]->getX();
-	//		int y = notes[i]->getY();
-	//		for (int i = 0; i < 9; i++)
-	//		{
-	//			boar[x][y + i] = ' ';
-	//			boar[x + 1][y + i] = ' ';
-	//			boar[x + 2][y + i] = ' ';
-	//		}
-	//		//delete notes[i];
-	//		notes.erase(notes.begin() + i);
-	//		notes.resize(notes.size() - 1);
-	//		break;
-	//	}
-	//}
 	size_t vec_size = 0;
+	bool nohit = true;
 	while (it != notes.end())
 	{
 		int x = (*it)->getX();
 		int y = (*it)->getY();
 		if ((*it)->getX() >= 28 && (*it)->getX() <= 30 && (*it)->getType() == 1)
 		{
+			nohit = false;
 			if ((*it)->getType() == 1)
 			{
 				for (int i = 0; i < 2; i++)
 				{
 					boar[x][y + i] = ' ';
 					boar[x + 1][y + i] = ' ';
+					if (x == 29)
+					{
+						playerScore += multiplier[multiplierPlace] * GOODHIT;
+					}
+					else
+					{
+						playerScore += multiplier[multiplierPlace] * BADHIT;
+					}
 				}
+				noteStreak++;
 			}
+
 			{
 				delete (*it);
 				it = notes.erase(it);
@@ -431,4 +452,13 @@ void Game::checkHit(vector<Note*> & notes)
 			++vec_size;
 		}
 	}
+	if (nohit)
+	{
+		//noteStreak = 0;
+		if (multiplierPlace > 0)
+		{
+			multiplierPlace == 0;
+		}
+	}
+
 }
