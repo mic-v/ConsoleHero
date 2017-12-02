@@ -85,22 +85,28 @@ int main()
 				system("cls");
 				if (menu.game)
 				{
-					printf("\n%13s%18s%16s", "Track List", "Difficulty", "Top Score");
+					printf("\n%13s%18s", "Track List", "Difficulty");
 					for (int i = 0; i < 33; i++)
 					{
 						menu.gotoxy( i, 33);
 						printf("|");
 					}
-					for (int i = 0; i < 8; i++)
-					{
-						menu.gotoxy(6 + i * 3 , 34);
-						//printf("%i%c",i + 1,'.');
-					}
+					//for (int i = 0; i < 8; i++)
+					//{
+					//	menu.gotoxy(6 + i * 3 , 34);
+					//	printf("%i%c",i + 1,'.');
+					//}
+					menu.gotoxy(31, 34);
+					printf("Enter to play");
 					menu.gotoxy(32, 34);
-					printf("ESC to go Back");
+					printf("ESC to go back");
 					int place = 0;
 					int start = 0;
-					int end = 7;
+					int end = 2;
+					//if (g.t.list.size() < 7)
+					//{
+					//	end = g.t.list.size();
+					//}
 					Game g;
 					bool moved = false;
 					string tmp = "SongPreview/";
@@ -117,24 +123,28 @@ int main()
 							menu.setSong(tmp);
 							moved = false;
 						}
-						for (int i = 0; i < 8; i++)
+						for (int i = 0; i < 1; i++)
 						{
+							if (i > g.t.list.size())
+							{
+								break;
+							}
 							menu.gotoxy(6 + 3 * i, 2);
 							cout << "                     " << endl;
-							cout << "                     "  << endl;
-							if (place - start  == i)
+							cout << "                     " << endl;
+							if (place - start == i)
 							{
 								SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 0x0B);
 							}
 							menu.gotoxy(6 + 3 * i, 2);
 							cout << g.t.artist[i + start] << "          " << endl;
-							cout << "     " <<g.t.song[i + start] << "         " << endl;
+							cout << "     " << g.t.song[i + start] << "         " << endl;
 							menu.gotoxy(6 + 3 * i, 22);
 							cout << "      " << endl;
 							menu.gotoxy(6 + 3 * i, 22);
 							if (g.t.listDifficulty[i + start] == 1)
 								cout << "EASY" << endl;
-							else if(g.t.listDifficulty[i + start] == 2)
+							else if (g.t.listDifficulty[i + start] == 2)
 								cout << "MEDIUM" << endl;
 							else if (g.t.listDifficulty[i + start] == 3)
 								cout << "HARD" << endl;
@@ -144,7 +154,7 @@ int main()
 						{
 							if (GetAsyncKeyState(VK_DOWN))
 							{
-								if (place < 14)
+								if (place < 1)
 								{
 									place++;
 									moved = true;
@@ -177,12 +187,19 @@ int main()
 							{
 								PlaySound(NULL, NULL, SND_ASYNC);
 								g.t.setTrackNumber(place);
+								g.t.setDifficulty(g.t.listDifficulty[place]);
 								g.t.setTrack();
 								Sleep(500);
 								menu.gotoxy(0, 0);
 								system("cls");
+								string tmp = "SongPreview/";
+								tmp += g.t.list[place];
+								tmp += ".wav";
+								menu.setSong(tmp);
 								g.init();
 								g.mainL();
+								menu.game = false;
+								menu.loadMenu();
 							}
 						}
 						Sleep(150);
@@ -193,7 +210,21 @@ int main()
 					system("cls");
 					while (menu.tutorial)
 					{
-
+						menu.gotoxy(0, 0);
+						cout << "Tutorial" << endl;
+						cout << "Notes will come down from the board" << endl;
+						cout << "There will be a hit bar at the bottom" << endl;
+						cout << "When the note comes near the hitbar, press A S D F in respect" << endl;
+						cout << "to the column the note is falling down" << endl;
+						cout << "Hitting a beat is 10 points, while hitting a beat perfectly is 30" << endl;
+						cout << "Hitting 10 consecutive notes increases your multiplier" << endl;
+						cout << "The multipliers are 1x,2x,4x, and 8x" << endl;
+						cout << "Hitting no note resets the multiplier back to 1x" << endl;
+						cout << "Good luck!" << endl;
+						system("pause");
+						system("cls");
+						menu.tutorial = false;
+						menu.loadMenu();
 					}
 				}
 				else if (menu.exit == true)

@@ -92,14 +92,38 @@ void Game::mainL()
 		updateBuffer();
 		updateScore();
 		input();
+		if (noHit > 20)
+		{
+			loop = false;
+			gameOver = true;
+			break;
+		}
 		nextLine();
 		move();
 		if (loop == false)
 			continue;
 		selDraw();
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		std::this_thread::sleep_for(std::chrono::milliseconds(t.difficulty));
 	}
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	if (gameOver == true)
+	{
+		gotoxy(5, 5);
+		printf("GAME OVER!");
+		gotoxy(33, 0);
+		system("pause");
+		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	}
+	else
+	{
+		gotoxy(5, 5);
+		printf("Good Job!");
+		gotoxy(6, 0);
+		printf("%s%i", "Score: ", playerScore);
+		gotoxy(33, 0);
+		system("pause");
+		std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+	}
 	system("cls");
 }
 
@@ -276,7 +300,7 @@ void Game::move()
 				{
 					int x = (*it)->getX();
 					int y = (*it)->getY();
-					if ((*it)->getType() == 1)
+					if ((*it)->getType() != 0)
 					{
 						for (int j = 0; j < 2; j++)
 						{
@@ -288,25 +312,25 @@ void Game::move()
 								boar[x + 1][y + j] = part[j];
 						}
 					}
-					else if ((*it)->getType() == 2)
-					{
-						for (int j = 0; j < 2; j++)
-						{
-							if (x > 1)
-							{
-								boar[x][y + j] = ' ';
-							}
-							for (int k = 0; k < (*it)->getLength(); ++k)
-							{
-								if (k == 0 && k + x >= 1 && k + x < 30)
-									boar[x + k + 1][y + j] = part[j];
-								else if (k == (*it)->getLength() - 1 && k + x >= 1 && k + x <= 30)
-									boar[x + k + 1][y + j] = partBot[j];
-								else if (k + x >= 1 && k + x <= 30)
-									boar[x + k + 1][y + j] = partMid[j];
-							}
-						}
-					}
+					//else if ((*it)->getType() == 2)
+					//{
+					//	for (int j = 0; j < 2; j++)
+					//	{
+					//		if (x > 1)
+					//		{
+					//			boar[x][y + j] = ' ';
+					//		}
+					//		for (int k = 0; k < (*it)->getLength(); ++k)
+					//		{
+					//			if (k == 0 && k + x >= 1 && k + x < 30)
+					//				boar[x + k + 1][y + j] = part[j];
+					//			else if (k == (*it)->getLength() - 1 && k + x >= 1 && k + x <= 30)
+					//				boar[x + k + 1][y + j] = partBot[j];
+					//			else if (k + x >= 1 && k + x <= 30)
+					//				boar[x + k + 1][y + j] = partMid[j];
+					//		}
+					//	}
+					//}
 
 					(*it)->setXY((*it)->getX() + 1, (*it)->getY());
 					it++;
@@ -324,6 +348,7 @@ void Game::move()
 					if (multiplierPlace > 0)
 						multiplierPlace--;
 					noteStreak = 0;
+					noHit++;
 				}
 
 			}
@@ -399,14 +424,22 @@ void Game::updateScore()
 	if (noteStreak > 30)
 	{
 		multiplierPlace = 3;
+		boar[29][50] = '0' + multiplier[multiplierPlace];
 	}
 	else if (noteStreak > 20)
 	{
 		multiplierPlace = 2;
+		boar[29][50] = '0' + multiplier[multiplierPlace];
 	}
 	else if (noteStreak > 10)
 	{
 		multiplierPlace = 1;
+		boar[29][50] = '0' + multiplier[multiplierPlace];
+	}
+	else if (noteStreak == 0)
+	{
+		multiplierPlace = 0;
+		boar[29][50] = '0' + multiplier[multiplierPlace];
 	}
 	
 }
@@ -418,6 +451,7 @@ void Game::checkHit(vector<Note*> & notes)
 	bool nohit = true;
 	while (it != notes.end())
 	{
+		noHit = 0;
 		int x = (*it)->getX();
 		int y = (*it)->getY();
 		if ((*it)->getX() >= 28 && (*it)->getX() <= 30 && (*it)->getType() == 1)
@@ -442,6 +476,7 @@ void Game::checkHit(vector<Note*> & notes)
 			}
 
 			{
+
 				delete (*it);
 				it = notes.erase(it);
 			}
@@ -454,7 +489,7 @@ void Game::checkHit(vector<Note*> & notes)
 	}
 	if (nohit)
 	{
-		//noteStreak = 0;
+		//noHit++;
 		if (multiplierPlace > 0)
 		{
 			multiplierPlace == 0;

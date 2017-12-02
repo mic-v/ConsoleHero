@@ -46,6 +46,8 @@ private:
 	int hitTotal;
 	int noteTotal;
 	int noteStreak;
+	int noHit = 0;
 	bool loop;
 	int endTimer;
+	bool gameOver = false;
 };

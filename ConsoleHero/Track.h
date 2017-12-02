@@ -27,10 +27,11 @@ public:
 	void setTrackNumber(int);
 	string getTrackFile();
 	int getTrackNumber();
-
+	void setDifficulty(int);
 
 	int getTrackLength();
-	
+	int difficulty;
+
 	vector<string> list;
 	vector<int> listDifficulty;
 	vector<string> listCopy;

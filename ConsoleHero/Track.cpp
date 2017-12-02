@@ -105,6 +105,22 @@ int Track::getTrackNumber()
 	return trackNumber;
 }
 
+void Track::setDifficulty(int diff)
+{
+	if (diff == 1)
+	{
+		difficulty = EASY;
+	}
+	else if (diff == 2)
+	{
+		difficulty = MEDIUM;
+	}
+	else if (diff == 3)
+	{
+		difficulty = HARD;
+	}
+}
+
 int Track::getTrackLength()
 {
 	return trackLength;
